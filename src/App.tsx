@@ -3,27 +3,19 @@ import {useEffect} from 'react'
 import {useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux'
 import {getPosts, postsSys} from './features/posts/postsSlice'
 import { useAppSelector , useAppDispatch} from './app/hooks'
-import Post from './components/Post/Post'
+import Header from './components/Header/Header'
+import Aside from './components/Aside/Aside'
+import {Routes, Route} from 'react-router-dom'
+import Posts from './components/Posts/Posts'
 
 function App() {
-
-  const posts = useAppSelector(postsSys)
-  const dispatch = useAppDispatch();
-  
-  useEffect(() => {
-    dispatch(getPosts())
-  }, [])
-  
-
   return (
     <div className="App">
-      <h1>¡Hola Cleverpy!</h1>
-      {posts.isLoading?
-        <h2>Cargando...</h2>:
-          posts.posts.map((item,i)=>{
-            return <Post post={item} i={i}/>
-        })
-      } 
+      <Header/>
+      <Aside/>
+        <Routes>
+          <Route path='/' element={<Posts/>}/>
+        </Routes>
     </div>
   )
 }

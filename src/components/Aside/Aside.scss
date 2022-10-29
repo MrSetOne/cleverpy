@@ -1,0 +1,11 @@
+@import '../../colors.scss';
+.asideMenu {
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    textarea {
+        flex: 1;
+    }
+}

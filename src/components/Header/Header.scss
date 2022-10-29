@@ -1,0 +1,5 @@
+@import '../../colors.scss';
+.header {
+    background-color: $primary;
+    grid-column: 1/span 2;
+}

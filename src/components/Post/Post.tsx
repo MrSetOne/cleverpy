@@ -22,7 +22,7 @@ const Post = ({post, i}:Props) => {
 
   return (
     <div key={post.id}>
-      <h1>{post.title}</h1>
+      <h1>{post.id}</h1>
       <button onClick={()=>doADelete(i)}>borrar</button>
     </div>
   )
