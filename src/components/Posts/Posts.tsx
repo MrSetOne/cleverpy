@@ -14,14 +14,14 @@ const Posts = () => {
   }, [])
 
   return (
-    <div className='posts__container'>
+    <section className='posts__container'>
       {posts.isLoading?
         <h2>Cargando...</h2>:
         posts.posts.map((item,i)=>{
           return <Post post={item} i={i}/>
         })
       }
-    </div>
+    </section>
   )
 
 
