@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState, AppThunk } from '../../app/store';
 import postsService from "./postsService";
 
 interface post{
@@ -8,7 +9,7 @@ interface post{
     body:string,
 }
 
-interface states{
+export interface states{
     isLoading:boolean,
     posts:post[]
 }
@@ -18,7 +19,9 @@ const initialState:states ={
     posts:[]
 }
 
-export const getPosts = createAsyncThunk("post/GetPosts", async() => {
+export const getPosts = createAsyncThunk(
+    "post/GetPosts", 
+    async() => {
     try {
         return await postsService.getPosts()
     } catch (error) {
@@ -30,7 +33,12 @@ export const getPosts = createAsyncThunk("post/GetPosts", async() => {
 export const postsSlice = createSlice({
     name:"posts",
     initialState,
-    reducers:{},
+    reducers:{
+        deletePost(state, action){
+            console.log(action)
+            state.posts.splice(action.payload, 1)
+        }
+    },
     extraReducers(builder) {
         builder
         .addCase(getPosts.pending,(state)=>{
@@ -42,5 +50,9 @@ export const postsSlice = createSlice({
         })
     },
 })
+
+export const {deletePost} = postsSlice.actions
+
+export const postsSys = (state:RootState) => state.posts
 
 export default postsSlice.reducer;

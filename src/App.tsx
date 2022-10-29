@@ -1,22 +1,29 @@
 import './App.scss'
 import {useEffect} from 'react'
 import {useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux'
-import {getPosts} from './features/posts/postsSlice'
+import {getPosts, postsSys} from './features/posts/postsSlice'
+import { useAppSelector , useAppDispatch} from './app/hooks'
+import Post from './components/Post/Post'
 
 function App() {
 
-  // !! CON UN ANY SE SOLUCIONA PERO NO SE PUEDE UTILIZAR !!
-  // const dispatch = useDispatch<any>()
-  const dispatch = useDispatch()
-  // const { posts } = useSelector((state) => state.posts)
-
+  const posts = useAppSelector(postsSys)
+  const dispatch = useAppDispatch();
+  
   useEffect(() => {
     dispatch(getPosts())
   }, [])
+  
 
   return (
     <div className="App">
       <h1>¡Hola Cleverpy!</h1>
+      {posts.isLoading?
+        <h2>Cargando...</h2>:
+          posts.posts.map((item,i)=>{
+            return <Post post={item} i={i}/>
+        })
+      } 
     </div>
   )
 }
