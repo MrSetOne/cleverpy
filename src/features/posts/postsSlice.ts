@@ -4,7 +4,8 @@ import postsService from "./postsService";
 
 interface post{
     id:number,
-    userId:number
+    userId:number,
+    gender?:'female' | 'male',
     title:string,
     body:string,
 }
@@ -25,7 +26,7 @@ export const getPosts = createAsyncThunk(
     try {
         return await postsService.getPosts()
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 });
 
@@ -34,8 +35,11 @@ export const postsSlice = createSlice({
     initialState,
     reducers:{
         deletePost(state, action){
-            console.log(action)
             state.posts.splice(action.payload, 1)
+        },
+        addPost(state,action){
+            const newPost = {...action.payload, id:state.posts.length+1}
+            state.posts = [newPost, ...state.posts]
         }
     },
     extraReducers(builder) {
@@ -50,7 +54,7 @@ export const postsSlice = createSlice({
     },
 })
 
-export const {deletePost} = postsSlice.actions
+export const {deletePost,addPost} = postsSlice.actions
 
 export const postsSys = (state:RootState) => state.posts
 

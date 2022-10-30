@@ -22,22 +22,20 @@ const LogPage = () => {
   const [data, setData] = useState<data>(initialData)
 
   const handleInputChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
-    setData({
-      ...data,
-      [e.target.name]:e.target.value
+    setData(prev=>{
+      prev={...prev,[e.target.name]:e.target.value}      
+      if (prev.username && prev.password) {
+        setSubmitable(true);
+      } else {
+        setSubmitable(false);
+      }
+      return prev
     });
-    console.log(data)
-    if (data.username && data.password) {
-      setSubmitable(true);
-    } else {
-      setSubmitable(false);
-    }
   };
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
     dispatch(login(data))
-    console.log(data);
   }
 
   return (
@@ -60,7 +58,15 @@ const LogPage = () => {
           id="password"
           onChange={handleInputChange}
         />
-        <button type="submit" style={{opacity:submitable?1:.7}}>Login</button>
+        <button
+          type="submit"
+          disabled={!submitable}
+          style={{
+            opacity:submitable?1:.7,
+            cursor:submitable?"pointer":'no-drop'
+          }}
+          >Login
+        </button>
       </form>
     </div>
   )
