@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getPosts, postsSys } from "../../features/posts/postsSlice";
-import Post from '../Post/Post';
+import Post from './Post/Post';
 import './Posts.scss'
 
 const Posts = () => {

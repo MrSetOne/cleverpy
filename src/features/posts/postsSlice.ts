@@ -26,7 +26,6 @@ export const getPosts = createAsyncThunk(
         return await postsService.getPosts()
     } catch (error) {
         console.log(error)
-        // Falta poner el thunkAPI.rejectWithValue de la polla que da error por el tipo
     }
 });
 

@@ -1,11 +1,12 @@
 @import 'colors';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
 html {
     font-size: 62.5%;
     box-sizing: border-box;
 }
 
 :root {
-    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
     width: 100%;
     color: white;
     background-color: $main;

@@ -1,5 +1,5 @@
-import { useAppDispatch } from "../../app/hooks"
-import {deletePost} from '../../features/posts/postsSlice'
+import { useAppDispatch } from "../../../app/hooks"
+import {deletePost} from '../../../features/posts/postsSlice'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBan} from '@fortawesome/free-solid-svg-icons'
 import './Post.scss'
@@ -18,12 +18,13 @@ interface Props{
 const Post = ({post, i}:Props) => {
 
   const dispatch = useAppDispatch()
+  
+  const pair = post.userId%2 === 0
 
   const doADelete = (item:number) =>{
     dispatch(deletePost(item))
   }
 
-  const pair = post.userId%2 === 0
 
   return (
     <article key={post.id} className='post'>
