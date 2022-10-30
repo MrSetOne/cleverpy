@@ -41,7 +41,7 @@ const LogPage = () => {
   return (
     <div className='logPage'>
       <img src={logo} alt="Cleverpy" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete='off'>
         <label htmlFor="username">Usuario</label>
         <input 
           type="text"
@@ -52,6 +52,7 @@ const LogPage = () => {
         />
         <label htmlFor="password">Contraseña</label>
         <input
+          autoComplete="off"
           type="password"
           name="password"
           placeholder='Tu contraseña'

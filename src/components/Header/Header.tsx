@@ -1,9 +1,10 @@
 import './Header.scss'
+import logo from '../../assets/Logo-Cleverpy-white.png'
 
 const Header = () => {
   return (
     <header className="header">
-      <h1>CleverPosts</h1>
+      <img src={logo} alt="Cleverpy" />
     </header>
   )
 }

@@ -18,7 +18,7 @@ const Posts = () => {
       {posts.isLoading?
         <h2>Cargando...</h2>:
         posts.posts.map((item,i)=>{
-          return <Post post={item} i={i}/>
+          return <Post post={item} i={i} key={item.id}/>
         })
       }
     </section>

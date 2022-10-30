@@ -8,7 +8,7 @@ import { addPost } from '../../../features/posts/postsSlice'
 const AsideUser = () => {
 
   const dispatch = useAppDispatch()
-  const user = useAppSelector(authSys)
+  const {user} = useAppSelector(authSys)
 
   interface post{
     userId:string|null,
@@ -18,8 +18,8 @@ const AsideUser = () => {
   }
 
   const initialState:post = {
-    userId:user.user.username,
-    gender: user.user.gender,
+    userId:user.username,
+    gender: user.gender,
     title:'',
     body:''
   }
@@ -45,21 +45,23 @@ const AsideUser = () => {
   const onSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     dispatch(addPost(post))
+    setPost(initialState)
+    setSubmitable(false)
   }
 
   return (
     <div className="AsideUser">
       <div>
         <img
-          src={`https://joeschmoe.io/api/v1/${user.user.gender}/${user.user.username}`}
+          src={`https://joeschmoe.io/api/v1/${user.gender}/${user.username}`}
           alt="Imagen de perfil"
         />
       </div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} autoComplete="off">
         <label htmlFor="title">Titulo</label>
-        <input type="text" name="title" id="title" onChange={handleChange}/>
+        <input type="text" name="title" id="title" onChange={handleChange} value={post.title} autoComplete="off"/>
         <label htmlFor="body">Cuerpo</label>
-        <textarea name="body" id="body" onChange={handleChange}></textarea>
+        <textarea name="body" id="body" onChange={handleChange} value={post.body} autoComplete="off"></textarea>
         <button
           type="submit"
           disabled={!submitable}

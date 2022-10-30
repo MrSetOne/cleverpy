@@ -1,8 +1,9 @@
-import { useAppDispatch } from "../../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../../app/hooks"
 import {deletePost} from '../../../features/posts/postsSlice'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBan} from '@fortawesome/free-solid-svg-icons'
 import './Post.scss'
+import { authSys } from "../../../features/auth/authSlice"
 
 
 interface Props{
@@ -18,6 +19,8 @@ interface Props{
 
 const Post = ({post, i}:Props) => {
 
+  const {user, logged} = useAppSelector(authSys)
+
   const dispatch = useAppDispatch()
   
   const gender = post.gender?post.gender:post.userId%2 === 0?'female':'male'
@@ -26,18 +29,22 @@ const Post = ({post, i}:Props) => {
     dispatch(deletePost(item))
   }
 
+  const noName = typeof post.userId === "number"
 
   return (
-    <article key={post.id} className='post'>
+    <article className='post'>
       <header className="post__header">
         <img 
           src={`https://joeschmoe.io/api/v1/${gender}/${post.userId}`}
           alt={`Avatar de ${post.userId}`}
         />
-        <h2>Usuario {post.userId}</h2>
-        <button onClick={()=>doADelete(i)}>
-          <FontAwesomeIcon icon={faBan} />
-        </button>
+        <h2>{noName?`Usuario ${post.userId}`:post.userId}</h2>
+        {
+          logged&&
+            <button onClick={()=>doADelete(i)}>
+              <FontAwesomeIcon icon={faBan} />
+            </button>
+        }
       </header>
       <div className="post_content">
         <h3>{post.title}</h3>

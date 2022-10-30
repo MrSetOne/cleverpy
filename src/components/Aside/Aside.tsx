@@ -7,7 +7,6 @@ import AsideUser from './AsideUser/AsideUser'
 const Aside = () => {
 
   const user = useAppSelector(authSys)
-  console.log(user);
 
   return (
     <aside className="asideMenu">
