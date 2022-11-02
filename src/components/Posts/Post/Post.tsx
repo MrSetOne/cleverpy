@@ -50,7 +50,8 @@ const Post = ({post, i}:Props) => {
           src={`https://joeschmoe.io/api/v1/${gender}/${post.userId}`}
           alt={`Avatar de ${post.userId}`}
         />
-        <h2>{noName?`Usuario ${post.userId}`:post.userId}</h2>
+        {/* <h2>{noName?`Usuario ${post.userId}`:post.userId}</h2> */}
+        <h2>{i}</h2>
         <div className="post__btns">
           {
             author&&

@@ -90,10 +90,10 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
             tools==='delete'?
             <div className="PostTools__delete">
                 <h3>¿Estás seguro de {author?'borrar':'ocultar'} este post?</h3>
-                <form>
+                <div>
                     <button onClick={()=>doADelete(i)}>Si</button>
                     <button onClick={()=>setTools(false)}>No</button>
-                </form>
+                </div>
             </div>
             :
             <div className="PostTools__update">

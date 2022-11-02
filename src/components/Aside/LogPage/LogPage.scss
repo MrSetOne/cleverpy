@@ -1,5 +1,6 @@
 .logPage {
-    width: 100%;
+    flex: 1;
+    max-width: 25rem;
     background-color: white;
     padding: 2rem;
     height: min(100%, 40rem);
@@ -18,7 +19,6 @@
         gap: .7rem;
         align-items: center;
         color: black;
-        width: 100%;
         label {
             font-size: 1.8rem;
             font-weight: 600

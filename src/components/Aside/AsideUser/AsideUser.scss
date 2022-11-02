@@ -4,7 +4,8 @@
     flex-direction: column;
     justify-content: center;
     height: min(70rem, 100%);
-    width: 100%;
+    flex: 1;
+    max-width: 30rem;
     gap: 2rem;
     header {
         display: flex;

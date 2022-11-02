@@ -38,7 +38,7 @@ export const postsSlice = createSlice({
             state.posts.splice(action.payload, 1)
         },
         addPost(state,action){
-            const newPost = {...action.payload, id:state.posts.length+1}
+            const newPost = {...action.payload, id:Math.trunc(Math.random()*100000000)}
             state.posts = [newPost, ...state.posts]
         },
         updatePost(state,action){

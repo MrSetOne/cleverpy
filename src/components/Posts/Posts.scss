@@ -6,3 +6,9 @@
     grid-auto-flow: dense;
     gap: 3rem;
 }
+
+@media (max-width: 800px) {
+    .posts__container {
+        grid-column: 1/3;
+    }
+}
