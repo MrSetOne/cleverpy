@@ -51,17 +51,41 @@ const AsideUser = () => {
 
   return (
     <div className="AsideUser">
-      <div>
-        <img
-          src={`https://joeschmoe.io/api/v1/${user.gender}/${user.username}`}
-          alt="Imagen de perfil"
-        />
-      </div>
+      <header>
+        <div>
+          <img
+            src={`https://joeschmoe.io/api/v1/${user.gender}/${user.username}`}
+            alt="Imagen de perfil"
+          />
+        </div>
+        <h2>{user.username}</h2>
+      </header>
       <form onSubmit={onSubmit} autoComplete="off">
-        <label htmlFor="title">Titulo</label>
-        <input type="text" name="title" id="title" onChange={handleChange} value={post.title} autoComplete="off"/>
-        <label htmlFor="body">Cuerpo</label>
-        <textarea name="body" id="body" onChange={handleChange} value={post.body} autoComplete="off"></textarea>
+        <div>
+          <label htmlFor="title">Titulo</label>
+          <p>{post.title.length}<span> /20</span></p>
+        </div>
+        <input
+          type="text" 
+          name="title" 
+          id="title" 
+          onChange={handleChange} 
+          value={post.title} 
+          autoComplete="off"
+          maxLength={20}
+        />
+        <div>
+          <label htmlFor="body">Cuerpo</label>
+          <p>{post.body.length}<span> /140</span></p>
+        </div>
+        <textarea 
+          name="body" 
+          id="body" 
+          onChange={handleChange} 
+          value={post.body} 
+          maxLength={140} 
+          autoComplete="off"
+        ></textarea>
         <button
           type="submit"
           disabled={!submitable}

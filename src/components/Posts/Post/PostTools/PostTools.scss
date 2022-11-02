@@ -1,0 +1,87 @@
+@import '../../../../colors.scss';
+.PostTools {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    .PostTools__delete {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        h3 {
+            font-size: 1.8rem;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            button {
+                padding: .5rem 2rem;
+                font-size: 1.8rem;
+                border-radius: 5rem;
+                border: 2px solid #0000003d;
+                transition: .5s;
+                background-color: rgb(224, 224, 224);
+            }
+            button:hover {
+                background-color: $white;
+            }
+            button:first-child {
+                color: white;
+                background-color: $red;
+            }
+            button:first-child:hover {
+                background-color: $redLight;
+            }
+        }
+    }
+    .PostTools__update {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        height: 100%;
+        padding: 2rem;
+        padding-top: 1rem;
+        width: 100%;
+        >div {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            p {
+                font-size: 1.8rem;
+                font-weight: 700;
+                cursor: pointer;
+                padding: 0 1rem;
+            }
+            div {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                background-color: rgba(255, 0, 0, 0.336);
+                left: 0;
+            }
+        }
+        form {
+            flex: 1;
+            width: 100%;
+            textarea {
+                height: 100%;
+                width: 100%;
+                resize: none;
+            }
+            >div {
+                width: 100%;
+                display: flex;
+                justify-content: end;
+            }
+        }
+    }
+}
