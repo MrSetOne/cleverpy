@@ -48,7 +48,6 @@
         justify-content: space-between;
         gap: 1rem;
         height: 100%;
-        padding: 2rem;
         padding-top: 1rem;
         width: 100%;
         >div {
@@ -72,15 +71,57 @@
         form {
             flex: 1;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
             textarea {
-                height: 100%;
                 width: 100%;
+                height: calc(100% - 4rem);
                 resize: none;
+                border: 1px solid #8080804d;
+                outline: none;
+                border-radius: .5rem;
+                padding: 1rem;
+                font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+                font-size: 1.5rem;
             }
-            >div {
+            input {
+                font-size: 1.5rem;
+                padding: 1rem;
+                width: 100%;
+                border: 1px solid #8080804d;
+                outline: none;
+                font-weight: 700;
+            }
+            >p {
+                display: block;
+                text-align: start;
+            }
+            footer {
                 width: 100%;
                 display: flex;
-                justify-content: end;
+                justify-content: flex-end;
+                gap: 1rem;
+                bottom: 0;
+                position: absolute;
+                button {
+                    padding: .5rem 2rem;
+                    font-size: 1.4rem;
+                    border-radius: 5rem;
+                    border: 2px solid #0000003d;
+                    transition: .5s;
+                    background-color: $blue;
+                    color: white;
+                }
+                button:hover {
+                    background-color: $blueLight;
+                }
+                button:first-child {
+                    background-color: $red;
+                }
+                button:first-child:hover {
+                    background-color: $redLight;
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../../app/hooks"
-import { deletePost } from "../../../../features/posts/postsSlice"
+import { deletePost, updatePost } from "../../../../features/posts/postsSlice"
 import { motion } from 'framer-motion'
 import './PostTools.scss'
 import { useState } from "react"
@@ -27,6 +27,11 @@ interface state{
         title:string,
         body:string
     }
+}
+
+interface show{
+    title:number,
+    body:number
 }
 
 const PostTools = ({tools, author, setTools, i, post}:props) => {
@@ -57,19 +62,22 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
     }
 
     const [state, setState] = useState<state>(initialState)
+    const [show, setShow] = useState<show>({body:initialState.post.body.length,title:initialState.post.title.length})
 
     const submitable = state.post.body.length <= 140 && state.post.title.length <= 20
 
     const handleChange = (e:form) => {
         setState(prev=>{
             prev.post = {...prev.post,[e.target.name]:e.target.value}
+            setShow({...show,[e.target.name]:e.target.value.length})
             return prev
         })
     }
 
     const submit = (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        console.log(state.post);
+        dispatch(updatePost({...state.post,i}))
+        setTools(false)
     }
 
     const doADelete = (item:number) =>{
@@ -94,9 +102,10 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
                     <p onClick={()=>setState({...state,updating:'title'})} >Titulo</p>
                     <p onClick={()=>setState({...state,updating:'body'})} >Cuerpo</p>
                 </div>
-                <form onSubmit={submit}>
+                <form onSubmit={submit} style={{justifyContent:state.updating==='title'?'center':undefined}}>
                     {
                         state.updating === 'title'?
+                        <>
                         <input
                             type="text"
                             name="title"
@@ -104,24 +113,29 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
                             defaultValue={state.post.title}
                             onChange={handleChange}
                             maxLength={20}
-                        />:
+                        />
+                        <p>{show.title}<span> /20</span></p>
+                        </>:
+                        <>
                         <textarea
                             name="body"
                             id="body"
                             defaultValue={state.post.body}
                             onChange={handleChange}
                             maxLength={140}
-                        ></textarea>
+                        />
+                        <p>{show.body}<span> /20</span></p>
+                        </>
                     }
-                    <div>
+                    <footer style={{position:state.updating==='title'?'absolute':undefined}}>
                         <button onClick={()=>setTools(false)}>Volver</button>
                         <button
                             type="submit"
                             disabled={!submitable}
                         >
-                            Cambiar
+                            Editar
                         </button>
-                    </div>
+                    </footer>
                 </form>
             </div>
         }
