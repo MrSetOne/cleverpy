@@ -1,35 +1,35 @@
 @import 'colors';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
 html {
-    font-size: 62.5%;
-    box-sizing: border-box;
+  font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 :root {
-    font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
-    width: 100%;
-    color: white;
-    background-color: $main;
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  width: 100%;
+  color: white;
+  background-color: $main;
 }
 
 * {
-    margin: 0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
+  margin: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }

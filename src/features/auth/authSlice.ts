@@ -1,38 +1,38 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, AppThunk } from '../../app/store';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState, AppThunk } from '../../app/store'
 
-interface user{
-    username:string | null,
-    gender: 'male' | 'female' | null
+interface user {
+  username: string | null
+  gender: 'male' | 'female' | null
 }
 
-interface states{
-    user:user,
-    logged:boolean
+interface states {
+  user: user
+  logged: boolean
 }
 
-const initialState:states={
-    user:{
-        username:null,
-        gender:null,
-    },
-    logged:false
+const initialState: states = {
+  user: {
+    username: null,
+    gender: null,
+  },
+  logged: false,
 }
 
 export const authSlice = createSlice({
-    name:'auth',
-    initialState,
-    reducers:{
-        login(state, action){
-            state.user.gender = Math.round(Math.random())?'female':'male';
-            state.user.username = action.payload.username
-            state.logged = true
-        },
+  name: 'auth',
+  initialState,
+  reducers: {
+    login(state, action) {
+      state.user.gender = Math.round(Math.random()) ? 'female' : 'male'
+      state.user.username = action.payload.username
+      state.logged = true
     },
+  },
 })
 
-export const {login} = authSlice.actions
+export const { login } = authSlice.actions
 
-export const authSys = (state:RootState) => state.user
+export const authSys = (state: RootState) => state.user
 
-export default authSlice.reducer;
+export default authSlice.reducer
