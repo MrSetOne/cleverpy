@@ -1,3 +1,4 @@
+import React from 'react'
 import { useAppDispatch } from '../../../../app/hooks'
 import { deletePost, updatePost } from '../../../../features/posts/postsSlice'
 import { motion } from 'framer-motion'

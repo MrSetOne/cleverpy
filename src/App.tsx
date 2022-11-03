@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.scss'
 import { useAppSelector } from './app/hooks'
 import Header from './components/Header/Header'

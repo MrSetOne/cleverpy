@@ -1,3 +1,4 @@
+import React from 'react'
 import './Header.scss'
 import logo from '../../assets/Logo-Cleverpy-white.png'
 

@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState, AppThunk } from '../../app/store'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../../app/store'
 import postsService from './postsService'
 
 interface post {
@@ -52,7 +52,7 @@ export const postsSlice = createSlice({
       state.posts[i] = { ...state.posts[i], title, body }
     },
     getMorePosts(state) {
-      let toExtract: number = 20
+      let toExtract = 20
       if (state.posts.length + 20 >= state.postsStorage.length) {
         toExtract = state.postsStorage.length - state.posts.length
       }

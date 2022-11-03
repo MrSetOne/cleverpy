@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import './LogPage.scss'
 import logo from '../../../assets/Logo-Cleverpy.png'

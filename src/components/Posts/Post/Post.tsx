@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { deletePost } from '../../../features/posts/postsSlice'
+import React from 'react'
+import { useAppSelector } from '../../../app/hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBan,
@@ -9,7 +9,7 @@ import {
 import './Post.scss'
 import { authSys } from '../../../features/auth/authSlice'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import PostTools from './PostTools/PostTools'
 
 interface Props {
