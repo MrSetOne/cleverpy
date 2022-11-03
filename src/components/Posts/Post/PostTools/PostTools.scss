@@ -97,31 +97,30 @@
                 display: block;
                 text-align: start;
             }
-            footer {
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-                gap: 1rem;
-                bottom: 0;
-                position: absolute;
-                button {
-                    padding: .5rem 2rem;
-                    font-size: 1.4rem;
-                    border-radius: 5rem;
-                    border: 2px solid #0000003d;
-                    transition: .5s;
-                    background-color: $blue;
-                    color: white;
-                }
-                button:hover {
-                    background-color: $blueLight;
-                }
-                button:first-child {
-                    background-color: $red;
-                }
-                button:first-child:hover {
-                    background-color: $redLight;
-                }
+        }
+        footer {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            bottom: 0;
+            button {
+                padding: .5rem 2rem;
+                font-size: 1.4rem;
+                border-radius: 5rem;
+                border: 2px solid #0000003d;
+                transition: .5s;
+                background-color: $blue;
+                color: white;
+            }
+            button:hover {
+                background-color: $blueLight;
+            }
+            button:first-child {
+                background-color: $red;
+            }
+            button:first-child:hover {
+                background-color: $redLight;
             }
         }
     }

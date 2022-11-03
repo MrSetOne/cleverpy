@@ -74,7 +74,7 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
         })
     }
 
-    const submit = (e:React.FormEvent<HTMLFormElement>) =>{
+    const submit = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
         e.preventDefault();
         dispatch(updatePost({...state.post,i}))
         setTools(false)
@@ -102,7 +102,7 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
                     <p onClick={()=>setState({...state,updating:'title'})} >Titulo</p>
                     <p onClick={()=>setState({...state,updating:'body'})} >Cuerpo</p>
                 </div>
-                <form onSubmit={submit} style={{justifyContent:state.updating==='title'?'center':undefined}}>
+                <form style={{justifyContent:state.updating==='title'?'center':undefined}}>
                     {
                         state.updating === 'title'?
                         <>
@@ -127,16 +127,17 @@ const PostTools = ({tools, author, setTools, i, post}:props) => {
                         <p>{show.body}<span> /20</span></p>
                         </>
                     }
-                    <footer style={{position:state.updating==='title'?'absolute':undefined}}>
-                        <button onClick={()=>setTools(false)}>Volver</button>
-                        <button
-                            type="submit"
-                            disabled={!submitable}
-                        >
-                            Editar
-                        </button>
-                    </footer>
                 </form>
+                <footer>
+                    <button onClick={()=>setTools(false)}>Volver</button>
+                    <button
+                        type="submit"
+                        disabled={!submitable}
+                        onClick={submit}
+                    >
+                        Editar
+                    </button>
+                </footer>
             </div>
         }
     </div>

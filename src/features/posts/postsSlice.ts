@@ -12,12 +12,14 @@ interface post{
 
 export interface states{
     isLoading:boolean,
-    posts:post[]
+    posts:post[],
+    postsStorage:post[]
 }
 
 const initialState:states ={
     isLoading:true,
-    posts:[]
+    posts:[],
+    postsStorage:[]
 }
 
 export const getPosts = createAsyncThunk(
@@ -35,15 +37,27 @@ export const postsSlice = createSlice({
     initialState,
     reducers:{
         deletePost(state, action){
-            state.posts.splice(action.payload, 1)
+            state.postsStorage.splice(action.payload, 1)
+            state.posts = state.postsStorage.slice(0,state.posts.length)
         },
         addPost(state,action){
             const newPost = {...action.payload, id:Math.trunc(Math.random()*100000000)}
-            state.posts = [newPost, ...state.posts]
+            state.postsStorage = [newPost, ...state.postsStorage]
+            state.posts = state.postsStorage.slice(0,state.posts.length)
         },
         updatePost(state,action){
             const {i,title,body} = action.payload
+            state.postsStorage[i]={...state.postsStorage[i],title,body}
             state.posts[i]={...state.posts[i],title,body}
+        },
+        getMorePosts(state){
+            let toExtract:number = 20
+            if(state.posts.length+20 >= state.postsStorage.length){
+                toExtract = state.postsStorage.length - state.posts.length
+            }
+            if(state.posts.length <= state.postsStorage.length){
+                state.posts = state.postsStorage.slice(0,state.posts.length + toExtract)
+            }
         }
     },
     extraReducers(builder) {
@@ -52,13 +66,14 @@ export const postsSlice = createSlice({
             state.isLoading=true
         })
         .addCase(getPosts.fulfilled,(state, action)=>{
-            state.posts = action.payload
+            state.postsStorage = action.payload
+            state.posts = action.payload.slice(0,20)
             state.isLoading=false
         })
     },
 })
 
-export const {deletePost,addPost,updatePost} = postsSlice.actions
+export const {deletePost,addPost,updatePost,getMorePosts} = postsSlice.actions
 
 export const postsSys = (state:RootState) => state.posts
 
