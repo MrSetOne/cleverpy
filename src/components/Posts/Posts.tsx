@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getPosts, postsSys } from "../../features/posts/postsSlice";
+import Spinner from '../Spinner/Spinner';
 import Post from './Post/Post';
 import './Posts.scss'
 
@@ -14,9 +15,9 @@ const Posts = () => {
   }, [])
 
   return (
-    <section className='posts__container'>
+    <section className={`posts__container ${posts.isLoading?'posts__container--loading':null}`}>
       {posts.isLoading?
-        <h2>Cargando...</h2>:
+        <Spinner/>:
         posts.posts.map((item,i)=>{
           return <Post post={item} i={i} key={item.id}/>
         })
