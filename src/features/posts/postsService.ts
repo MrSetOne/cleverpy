@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const getPosts = async()=>{
-    const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    return res.data
+const getPosts = async () => {
+  const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
+  return res.data
 }
 
 const postsService = {
-    getPosts
+  getPosts,
 }
 
 export default postsService
