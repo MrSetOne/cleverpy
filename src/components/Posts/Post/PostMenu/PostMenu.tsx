@@ -10,11 +10,11 @@ interface props {
   setTools: React.Dispatch<React.SetStateAction<tools>>
   author: boolean
   tools: tools
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PostMenu = ({ tools, setTools, author }: props) => {
-  const [open, setOpen] = useState<boolean>(false)
-
+const PostMenu = ({ tools, setTools, author, open, setOpen }: props) => {
   const variants = {
     container: {
       closed: {
@@ -53,6 +53,14 @@ const PostMenu = ({ tools, setTools, author }: props) => {
     },
   }
 
+  const mainClick = () => {
+    if (open) {
+      setOpen(false)
+      setTools(false)
+    } else {
+      setOpen(true)
+    }
+  }
   return (
     <motion.div
       className='PostMenu'
@@ -65,7 +73,7 @@ const PostMenu = ({ tools, setTools, author }: props) => {
         initial={'closed'}
         animate={open ? 'open' : 'closed'}
         whileHover={{ scale: 1.1 }}
-        onClick={() => setOpen(!open)}
+        onClick={mainClick}
       >
         <FontAwesomeIcon icon={faXmark} />
       </motion.button>

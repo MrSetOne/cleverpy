@@ -30,6 +30,7 @@ const Post = ({ post, i }: Props) => {
   const author = user.username === post.userId
 
   const [tools, setTools] = useState<tools>(false)
+  const [open, setOpen] = useState<boolean>(false)
 
   const variants = {
     initial: {
@@ -54,7 +55,7 @@ const Post = ({ post, i }: Props) => {
           alt={`Avatar de ${post.userId}`}
         />
         <h2>{post.userId}</h2>
-        <PostMenu setTools={setTools} author={author} tools={tools} />
+        <PostMenu setTools={setTools} author={author} tools={tools} open={open} setOpen={setOpen} />
       </header>
       {!tools ? (
         <div className='post_content'>
@@ -62,7 +63,14 @@ const Post = ({ post, i }: Props) => {
           <p>{post.body}</p>
         </div>
       ) : (
-        <PostTools tools={tools} author={author} i={i} setTools={setTools} post={post} />
+        <PostTools
+          tools={tools}
+          author={author}
+          i={i}
+          setTools={setTools}
+          post={post}
+          setOpen={setOpen}
+        />
       )}
     </motion.article>
   )

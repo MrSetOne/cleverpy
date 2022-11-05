@@ -20,6 +20,7 @@ interface props {
     title: string
     body: string
   }
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface state {
@@ -36,7 +37,7 @@ interface show {
   body: number
 }
 
-const PostTools = ({ tools, author, setTools, i, post }: props) => {
+const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
   const dispatch = useAppDispatch()
 
   const initialState: state = {
@@ -86,6 +87,7 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
     e.preventDefault()
     dispatch(updatePost({ ...state.post, i }))
     setTools(false)
+    setOpen(false)
   }
 
   const doADelete = (item: number) => {
