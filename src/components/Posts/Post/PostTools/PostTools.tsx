@@ -28,6 +28,7 @@ interface state {
     title: string
     body: string
   }
+  submitable: boolean
 }
 
 interface show {
@@ -44,6 +45,7 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
       title: post.title,
       body: post.body,
     },
+    submitable: false,
   }
 
   const variants = {
@@ -67,12 +69,15 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
     title: initialState.post.title.length,
   })
 
-  const submitable = state.post.body.length <= 140 && state.post.title.length <= 20
-
   const handleChange = (e: form) => {
     setState((prev) => {
       prev.post = { ...prev.post, [e.target.name]: e.target.value }
       setShow({ ...show, [e.target.name]: e.target.value.length })
+      if (prev.post.title && prev.post.body) {
+        prev.submitable = true
+      } else {
+        prev.submitable = false
+      }
       return prev
     })
   }
@@ -135,14 +140,22 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
                 />
                 <p>
                   {show.body}
-                  <span> /20</span>
+                  <span> /140</span>
                 </p>
               </>
             )}
           </form>
           <footer>
             <button onClick={() => setTools(false)}>Volver</button>
-            <button type='submit' disabled={!submitable} onClick={submit}>
+            <button
+              type='submit'
+              disabled={!state.submitable}
+              style={{
+                opacity: state.submitable ? 1 : 0.7,
+                cursor: state.submitable ? 'pointer' : 'no-drop',
+              }}
+              onClick={submit}
+            >
               Editar
             </button>
           </footer>
