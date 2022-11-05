@@ -45,7 +45,11 @@ const Aside = () => {
       initial={'close'}
       animate={menuOpen ? 'open' : 'close'}
     >
-      {user.logged ? <AsideUser /> : <LogPage />}
+      {user.logged ? (
+        <AsideUser setMenuOpen={setMenuOpen} />
+      ) : (
+        <LogPage setMenuOpen={setMenuOpen} />
+      )}
       {burger && <BurgerIcon menuOpen={menuOpen} setMenuOpen={setMenuOpen} />}
     </motion.aside>
   )

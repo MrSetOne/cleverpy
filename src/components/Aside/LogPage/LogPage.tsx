@@ -5,7 +5,11 @@ import logo from '../../../assets/Logo-Cleverpy.png'
 import { useAppDispatch } from '../../../app/hooks'
 import { login } from '../../../features/auth/authSlice'
 
-const LogPage = () => {
+interface props {
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const LogPage = ({ setMenuOpen }: props) => {
   const dispatch = useAppDispatch()
 
   interface data {
@@ -36,6 +40,7 @@ const LogPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(login(data))
+    setMenuOpen(false)
   }
 
   return (

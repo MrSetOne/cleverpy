@@ -5,7 +5,11 @@ import { useState } from 'react'
 import './AsideUser.scss'
 import { addPost } from '../../../features/posts/postsSlice'
 
-const AsideUser = () => {
+interface props {
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AsideUser = ({ setMenuOpen }: props) => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector(authSys)
 
@@ -45,6 +49,7 @@ const AsideUser = () => {
     dispatch(addPost(post))
     setPost(initialState)
     setSubmitable(false)
+    setMenuOpen(false)
   }
 
   return (
