@@ -1,0 +1,36 @@
+@import '../../../../colors.scss';
+.PostMenu {
+  background-color: rgba(0, 0, 0, 0.151);
+  padding: 0.5rem;
+  border-radius: 4rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+  align-items: center;
+  overflow: hidden;
+  button {
+    border-radius: 50%;
+    font-size: 1.5rem;
+    width: 3rem;
+    aspect-ratio: 1/1;
+    border: 2px solid rgba(0, 0, 0, 0.308);
+    transition: background-color 0.5s;
+    z-index: 2;
+  }
+  .PostMenu--delete {
+    background-color: $red;
+    color: white;
+    z-index: 1;
+  }
+  .PostMenu--delete:hover {
+    background-color: $redLight;
+  }
+  .PostMenu--edit {
+    background-color: $blue;
+    color: white;
+    z-index: 1;
+  }
+  .PostMenu--edit:hover {
+    background-color: $blueLight;
+  }
+}

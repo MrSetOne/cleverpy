@@ -7,6 +7,7 @@ import { authSys } from '../../../features/auth/authSlice'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import PostTools from './PostTools/PostTools'
+import PostMenu from './PostMenu/PostMenu'
 
 interface Props {
   post: {
@@ -30,8 +31,6 @@ const Post = ({ post, i }: Props) => {
 
   const [tools, setTools] = useState<tools>(false)
 
-  const noName = typeof post.userId === 'number'
-
   const variants = {
     initial: {
       height: '24rem',
@@ -54,25 +53,8 @@ const Post = ({ post, i }: Props) => {
           src={`https://joeschmoe.io/api/v1/${gender}/${post.userId}`}
           alt={`Avatar de ${post.userId}`}
         />
-        <h2>{noName ? `Usuario ${post.userId}` : post.userId}</h2>
-        <div className='post__btns'>
-          {author && (
-            <button
-              className='post__btns--edit'
-              onClick={() => setTools(tools !== 'edit' && 'edit')}
-            >
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </button>
-          )}
-          {logged && (
-            <button
-              className='post__btns--delete'
-              onClick={() => setTools(tools !== 'delete' && 'delete')}
-            >
-              <FontAwesomeIcon icon={author ? faBan : faEyeSlash} />
-            </button>
-          )}
-        </div>
+        <h2>{post.userId}</h2>
+        <PostMenu setTools={setTools} author={author} tools={tools} />
       </header>
       {!tools ? (
         <div className='post_content'>

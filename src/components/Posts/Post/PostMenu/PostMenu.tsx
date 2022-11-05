@@ -1,0 +1,95 @@
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import './PostMenu.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBan, faEyeSlash, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
+
+type tools = 'edit' | 'delete' | false
+
+interface props {
+  setTools: React.Dispatch<React.SetStateAction<tools>>
+  author: boolean
+  tools: tools
+}
+
+const PostMenu = ({ tools, setTools, author }: props) => {
+  const [open, setOpen] = useState<boolean>(false)
+
+  const variants = {
+    container: {
+      closed: {
+        width: 40,
+        transition: {
+          duration: 0.3,
+        },
+      },
+      open: {
+        width: author ? 112 : 77,
+      },
+    },
+    menuBotton: {
+      closed: {
+        marginLeft: -30,
+        rotate: '-45deg',
+      },
+      open: {
+        marginLeft: 6,
+        rotate: '360deg',
+      },
+    },
+    editButton: {
+      closed: {
+        marginLeft: -30,
+        transition: {
+          duration: 0.3,
+        },
+      },
+      open: {
+        marginLeft: 6,
+        transition: {
+          duration: 0.3,
+        },
+      },
+    },
+  }
+
+  return (
+    <motion.div
+      className='PostMenu'
+      variants={variants.container}
+      initial={'closed'}
+      animate={open ? 'open' : 'closed'}
+    >
+      <motion.button
+        variants={variants.menuBotton}
+        initial={'closed'}
+        animate={open ? 'open' : 'closed'}
+        whileHover={{ scale: 1.1 }}
+        onClick={() => setOpen(!open)}
+      >
+        <FontAwesomeIcon icon={faXmark} />
+      </motion.button>
+      {author && (
+        <motion.button
+          className='PostMenu--edit'
+          variants={variants.editButton}
+          initial={'closed'}
+          animate={open ? 'open' : 'closed'}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => setTools(tools !== 'edit' ? 'edit' : false)}
+        >
+          <FontAwesomeIcon icon={faPenToSquare} />
+        </motion.button>
+      )}
+      <motion.button
+        className='PostMenu--delete'
+        onClick={() => setTools(tools !== 'delete' ? 'delete' : false)}
+        whileHover={{ scale: 1.1 }}
+      >
+        <FontAwesomeIcon icon={author ? faBan : faEyeSlash} />
+      </motion.button>
+    </motion.div>
+  )
+}
+
+export default PostMenu
