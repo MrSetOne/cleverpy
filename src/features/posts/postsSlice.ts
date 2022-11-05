@@ -5,7 +5,7 @@ import postsService from './postsService'
 interface post {
   id: number
   userId: number
-  gender?: 'female' | 'male'
+  gender: 'female' | 'male'
   title: string
   body: string
 }
@@ -71,7 +71,7 @@ export const postsSlice = createSlice({
       })
       .addCase(getPosts.fulfilled, (state, action) => {
         state.postsStorage = action.payload
-        state.posts = action.payload.slice(0, 20)
+        state.posts = state.postsStorage.slice(0, 20)
         state.isLoading = false
       })
   },
