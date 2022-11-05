@@ -1,0 +1,19 @@
+@import '../../../colors.scss';
+.ScrollToTop {
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.301);
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 3rem;
+  padding: 1rem;
+  height: 7rem;
+  aspect-ratio: 1/1;
+  position: absolute;
+  bottom: 0rem;
+  right: 0;
+  margin: 1rem 3rem;
+}

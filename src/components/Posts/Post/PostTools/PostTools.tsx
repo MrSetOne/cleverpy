@@ -6,9 +6,7 @@ import './PostTools.scss'
 import { useState } from 'react'
 
 type tools = 'edit' | 'delete' | false
-type form =
-  | React.ChangeEvent<HTMLInputElement>
-  | React.ChangeEvent<HTMLTextAreaElement>
+type form = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
 
 interface props {
   tools: 'edit' | 'delete'
@@ -69,8 +67,7 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
     title: initialState.post.title.length,
   })
 
-  const submitable =
-    state.post.body.length <= 140 && state.post.title.length <= 20
+  const submitable = state.post.body.length <= 140 && state.post.title.length <= 20
 
   const handleChange = (e: form) => {
     setState((prev) => {
@@ -91,9 +88,9 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
   }
 
   return (
-    <div className="PostTools">
+    <div className='PostTools'>
       {tools === 'delete' ? (
-        <div className="PostTools__delete">
+        <div className='PostTools__delete'>
           <h3>¿Estás seguro de {author ? 'borrar' : 'ocultar'} este post?</h3>
           <div>
             <button onClick={() => doADelete(i)}>Si</button>
@@ -101,19 +98,11 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
           </div>
         </div>
       ) : (
-        <div className="PostTools__update">
+        <div className='PostTools__update'>
           <div>
-            <motion.div
-              variants={variants}
-              initial={'title'}
-              animate={state.updating}
-            />
-            <p onClick={() => setState({ ...state, updating: 'title' })}>
-              Titulo
-            </p>
-            <p onClick={() => setState({ ...state, updating: 'body' })}>
-              Cuerpo
-            </p>
+            <motion.div variants={variants} initial={'title'} animate={state.updating} />
+            <p onClick={() => setState({ ...state, updating: 'title' })}>Titulo</p>
+            <p onClick={() => setState({ ...state, updating: 'body' })}>Cuerpo</p>
           </div>
           <form
             style={{
@@ -123,9 +112,9 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
             {state.updating === 'title' ? (
               <>
                 <input
-                  type="text"
-                  name="title"
-                  id="title"
+                  type='text'
+                  name='title'
+                  id='title'
                   defaultValue={state.post.title}
                   onChange={handleChange}
                   maxLength={20}
@@ -138,8 +127,8 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
             ) : (
               <>
                 <textarea
-                  name="body"
-                  id="body"
+                  name='body'
+                  id='body'
                   defaultValue={state.post.body}
                   onChange={handleChange}
                   maxLength={140}
@@ -153,7 +142,7 @@ const PostTools = ({ tools, author, setTools, i, post }: props) => {
           </form>
           <footer>
             <button onClick={() => setTools(false)}>Volver</button>
-            <button type="submit" disabled={!submitable} onClick={submit}>
+            <button type='submit' disabled={!submitable} onClick={submit}>
               Editar
             </button>
           </footer>

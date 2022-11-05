@@ -39,28 +39,28 @@ const LogPage = () => {
   }
 
   return (
-    <div className="logPage">
-      <img src={logo} alt="Cleverpy" />
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <label htmlFor="username">Usuario</label>
+    <div className='logPage'>
+      <img src={logo} alt='Cleverpy' />
+      <form onSubmit={handleSubmit} autoComplete='off'>
+        <label htmlFor='username'>Usuario</label>
         <input
-          type="text"
-          name="username"
-          placeholder="Tu usuario"
-          id="username"
+          type='text'
+          name='username'
+          placeholder='Tu usuario'
+          id='username'
           onChange={handleInputChange}
         />
-        <label htmlFor="password">Contraseña</label>
+        <label htmlFor='password'>Contraseña</label>
         <input
-          autoComplete="off"
-          type="password"
-          name="password"
-          placeholder="Tu contraseña"
-          id="password"
+          autoComplete='off'
+          type='password'
+          name='password'
+          placeholder='Tu contraseña'
+          id='password'
           onChange={handleInputChange}
         />
         <button
-          type="submit"
+          type='submit'
           disabled={!submitable}
           style={{
             opacity: submitable ? 1 : 0.7,

@@ -57,10 +57,7 @@ export const postsSlice = createSlice({
         toExtract = state.postsStorage.length - state.posts.length
       }
       if (state.posts.length <= state.postsStorage.length) {
-        state.posts = state.postsStorage.slice(
-          0,
-          state.posts.length + toExtract
-        )
+        state.posts = state.postsStorage.slice(0, state.posts.length + toExtract)
       }
     },
   },
@@ -77,8 +74,7 @@ export const postsSlice = createSlice({
   },
 })
 
-export const { deletePost, addPost, updatePost, getMorePosts } =
-  postsSlice.actions
+export const { deletePost, addPost, updatePost, getMorePosts } = postsSlice.actions
 
 export const postsSys = (state: RootState) => state.posts
 

@@ -12,12 +12,12 @@ function App() {
   const { logged } = useAppSelector(authSys)
 
   return (
-    <div className="App">
+    <div className='App'>
       <Header />
       <Aside />
       {logged ? (
         <Routes>
-          <Route path="/" element={<Posts />} />
+          <Route path='/' element={<Posts />} />
         </Routes>
       ) : (
         <Unlogged />

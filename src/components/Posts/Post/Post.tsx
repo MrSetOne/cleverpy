@@ -1,11 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../../app/hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faBan,
-  faEyeSlash,
-  faPenToSquare,
-} from '@fortawesome/free-solid-svg-icons'
+import { faBan, faEyeSlash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import './Post.scss'
 import { authSys } from '../../../features/auth/authSlice'
 import { useState } from 'react'
@@ -28,11 +24,7 @@ type tools = 'edit' | 'delete' | false
 const Post = ({ post, i }: Props) => {
   const { user, logged } = useAppSelector(authSys)
 
-  const gender = post.gender
-    ? post.gender
-    : Number(post.userId) % 2 === 0
-    ? 'female'
-    : 'male'
+  const gender = post.gender ? post.gender : Number(post.userId) % 2 === 0 ? 'female' : 'male'
 
   const author = user.username === post.userId
 
@@ -51,22 +43,22 @@ const Post = ({ post, i }: Props) => {
 
   return (
     <motion.article
-      className="post"
+      className='post'
       variants={variants}
-      initial="initial"
+      initial='initial'
       animate={tools ? 'open' : 'initial'}
       whileHover={{ scale: 1.03 }}
     >
-      <header className="post__header">
+      <header className='post__header'>
         <img
           src={`https://joeschmoe.io/api/v1/${gender}/${post.userId}`}
           alt={`Avatar de ${post.userId}`}
         />
         <h2>{noName ? `Usuario ${post.userId}` : post.userId}</h2>
-        <div className="post__btns">
+        <div className='post__btns'>
           {author && (
             <button
-              className="post__btns--edit"
+              className='post__btns--edit'
               onClick={() => setTools(tools !== 'edit' && 'edit')}
             >
               <FontAwesomeIcon icon={faPenToSquare} />
@@ -74,7 +66,7 @@ const Post = ({ post, i }: Props) => {
           )}
           {logged && (
             <button
-              className="post__btns--delete"
+              className='post__btns--delete'
               onClick={() => setTools(tools !== 'delete' && 'delete')}
             >
               <FontAwesomeIcon icon={author ? faBan : faEyeSlash} />
@@ -83,18 +75,12 @@ const Post = ({ post, i }: Props) => {
         </div>
       </header>
       {!tools ? (
-        <div className="post_content">
+        <div className='post_content'>
           <h3>{post.title}</h3>
           <p>{post.body}</p>
         </div>
       ) : (
-        <PostTools
-          tools={tools}
-          author={author}
-          i={i}
-          setTools={setTools}
-          post={post}
-        />
+        <PostTools tools={tools} author={author} i={i} setTools={setTools} post={post} />
       )}
     </motion.article>
   )

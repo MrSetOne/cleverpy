@@ -23,9 +23,7 @@ const AsideUser = () => {
     body: '',
   }
 
-  type form =
-    | React.ChangeEvent<HTMLInputElement>
-    | React.ChangeEvent<HTMLTextAreaElement>
+  type form = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
 
   const [post, setPost] = useState<post>(initialState)
   const [submitable, setSubmitable] = useState<boolean>(false)
@@ -50,50 +48,50 @@ const AsideUser = () => {
   }
 
   return (
-    <div className="AsideUser">
+    <div className='AsideUser'>
       <header>
         <div>
           <img
             src={`https://joeschmoe.io/api/v1/${user.gender}/${user.username}`}
-            alt="Imagen de perfil"
+            alt='Imagen de perfil'
           />
         </div>
         <h2>{user.username}</h2>
       </header>
-      <form onSubmit={onSubmit} autoComplete="off">
+      <form onSubmit={onSubmit} autoComplete='off'>
         <div>
-          <label htmlFor="title">Titulo</label>
+          <label htmlFor='title'>Titulo</label>
           <p>
             {post.title.length}
             <span> /20</span>
           </p>
         </div>
         <input
-          type="text"
-          name="title"
-          id="title"
+          type='text'
+          name='title'
+          id='title'
           onChange={handleChange}
           value={post.title}
-          autoComplete="off"
+          autoComplete='off'
           maxLength={20}
         />
         <div>
-          <label htmlFor="body">Cuerpo</label>
+          <label htmlFor='body'>Cuerpo</label>
           <p>
             {post.body.length}
             <span> /140</span>
           </p>
         </div>
         <textarea
-          name="body"
-          id="body"
+          name='body'
+          id='body'
           onChange={handleChange}
           value={post.body}
           maxLength={140}
-          autoComplete="off"
+          autoComplete='off'
         ></textarea>
         <button
-          type="submit"
+          type='submit'
           disabled={!submitable}
           style={{
             opacity: submitable ? 1 : 0.7,

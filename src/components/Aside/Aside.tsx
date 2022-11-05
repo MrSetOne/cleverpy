@@ -30,9 +30,7 @@ const Aside = () => {
   const variants = {
     open: {
       left: '-10vw',
-      boxShadow: burger
-        ? '-22px 0px 35px 34px rgba(0, 0, 0, 0.749)'
-        : undefined,
+      boxShadow: burger ? '-22px 0px 35px 34px rgba(0, 0, 0, 0.749)' : undefined,
     },
     close: {
       left: '-100vw',
@@ -42,7 +40,7 @@ const Aside = () => {
 
   return (
     <motion.aside
-      className="asideMenu"
+      className='asideMenu'
       variants={variants}
       initial={'close'}
       animate={menuOpen ? 'open' : 'close'}
