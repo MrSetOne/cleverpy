@@ -8,15 +8,13 @@ interface user {
 
 interface states {
   user: user
-  logged: boolean
 }
 
 const initialState: states = {
   user: {
-    username: null,
-    gender: null,
+    username: localStorage.username ? localStorage.username : null,
+    gender: localStorage.gender ? localStorage.gender : null,
   },
-  logged: false,
 }
 
 export const authSlice = createSlice({
@@ -25,8 +23,9 @@ export const authSlice = createSlice({
   reducers: {
     login(state, action) {
       state.user.gender = Math.round(Math.random()) ? 'female' : 'male'
+      localStorage.setItem('gender', state.user.gender)
       state.user.username = action.payload.username
-      state.logged = true
+      localStorage.setItem('username', action.payload.username)
     },
   },
 })

@@ -25,7 +25,7 @@ const Aside = () => {
 
   const burger: boolean = screenWidth <= 800
 
-  const user = useAppSelector(authSys)
+  const { user } = useAppSelector(authSys)
 
   const variants = {
     open: {
@@ -45,7 +45,7 @@ const Aside = () => {
       initial={'close'}
       animate={menuOpen ? 'open' : 'close'}
     >
-      {user.logged ? (
+      {user.username ? (
         <AsideUser setMenuOpen={setMenuOpen} />
       ) : (
         <LogPage setMenuOpen={setMenuOpen} />
