@@ -45,7 +45,11 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     deletePost(state, action) {
-      console.log(action.payload)
+      const customPosts: post[] = JSON.parse(localStorage.customPosts)
+      localStorage.setItem(
+        'customPosts',
+        JSON.stringify(customPosts.filter((item) => item.id !== action.payload)),
+      )
       state.postsStorage = state.postsStorage.filter((item) => item.id !== action.payload)
       state.posts = state.posts.filter((item) => item.id !== action.payload)
       if (state.profile) {
@@ -57,11 +61,17 @@ export const postsSlice = createSlice({
         ...action.payload,
         id: Math.trunc(Math.random() * 100000000),
       }
+      const customPosts = JSON.parse(localStorage.customPosts)
+      localStorage.setItem('customPosts', JSON.stringify([newPost && newPost, ...customPosts]))
       state.postsStorage = [newPost, ...state.postsStorage]
       state.posts = state.postsStorage.slice(0, state.posts.length)
     },
     updatePost(state, action) {
-      const { i, title, body } = action.payload
+      const { i, title, body, id } = action.payload
+      const customPosts: post[] = JSON.parse(localStorage.customPosts)
+      const customIndex = customPosts.findIndex((item) => item.id === id)
+      customPosts[customIndex] = { ...customPosts[customIndex], title, body }
+      localStorage.setItem('customPosts', JSON.stringify(customPosts))
       state.postsStorage[i] = { ...state.postsStorage[i], title, body }
       state.posts[i] = { ...state.posts[i], title, body }
     },
@@ -76,7 +86,6 @@ export const postsSlice = createSlice({
     },
     getProfile(state, action) {
       state.isLoading = true
-      console.log(`Se solicita ${action.payload}`)
       const i = state.postsStorage.findIndex((item) => item.userId === action.payload)
       if (i === -1) {
         state.profile = null
@@ -106,6 +115,7 @@ export const postsSlice = createSlice({
           }
           return item
         })
+        state.postsStorage = [...JSON.parse(localStorage.customPosts), ...state.postsStorage]
         state.posts = state.postsStorage.slice(0, 20)
         state.isLoading = false
       })

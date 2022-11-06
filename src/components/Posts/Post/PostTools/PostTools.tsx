@@ -26,6 +26,7 @@ interface props {
 interface state {
   updating: 'title' | 'body'
   post: {
+    id: number
     title: string
     body: string
   }
@@ -43,6 +44,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
   const initialState: state = {
     updating: 'title',
     post: {
+      id: post.id,
       title: post.title,
       body: post.body,
     },
