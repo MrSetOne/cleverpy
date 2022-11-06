@@ -16,6 +16,7 @@ interface Props {
     gender?: 'female' | 'male'
     title: string
     body: string
+    username: string
   }
   i: number
 }
@@ -23,9 +24,7 @@ interface Props {
 type tools = 'edit' | 'delete' | false
 
 const Post = ({ post, i }: Props) => {
-  const { user, logged } = useAppSelector(authSys)
-
-  const gender = post.gender ? post.gender : Number(post.userId) % 2 === 0 ? 'female' : 'male'
+  const { user } = useAppSelector(authSys)
 
   const author = user.username === post.userId
 
@@ -51,10 +50,10 @@ const Post = ({ post, i }: Props) => {
     >
       <header className='post__header'>
         <img
-          src={`https://joeschmoe.io/api/v1/${gender}/${post.userId}`}
+          src={`https://joeschmoe.io/api/v1/${post.gender}/${post.userId}`}
           alt={`Avatar de ${post.userId}`}
         />
-        <h2>{post.userId}</h2>
+        <h2>{post.username}</h2>
         <PostMenu setTools={setTools} author={author} tools={tools} open={open} setOpen={setOpen} />
       </header>
       {!tools ? (

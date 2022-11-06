@@ -5,6 +5,7 @@ import postsService from './postsService'
 interface post {
   id: number
   userId: number
+  username: string
   gender: 'female' | 'male'
   title: string
   body: string

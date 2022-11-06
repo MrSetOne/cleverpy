@@ -3,6 +3,7 @@ import axios from 'axios'
 interface post {
   id: number
   userId: number
+  username: string
   title: string
   body: string
   gender: 'female' | 'male'
@@ -14,7 +15,7 @@ const getPosts = async () => {
   console.log(res.data)
   res.data.forEach((post: post) => {
     post.gender = users.data.results[post.userId - 1].gender
-    post.userId = users.data.results[post.userId - 1].name.first
+    post.username = users.data.results[post.userId - 1].name.first
   })
   res.data.sort(() => Math.random() - 0.5)
   return res.data
