@@ -1,20 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import postsService from './postsService'
-
-interface post {
-  id: number
-  userId: number
-  username: string
-  gender: 'female' | 'male'
-  title: string
-  body: string
-}
+import { post } from '../../types'
 
 interface profile {
-  id: number
-  username: string
-  gender: 'female' | 'male'
+  id: number | null
+  username: string | null
+  gender: 'female' | 'male' | null
   posts: post[]
 }
 
@@ -107,10 +99,10 @@ export const postsSlice = createSlice({
       })
       .addCase(getPosts.fulfilled, (state, action) => {
         state.postsStorage = action.payload.map((item: post, i: number) => {
-          if (item.title.length >= 17) {
+          if (item.title && item.title.length >= 17) {
             item.title = `${item.title.slice(0, 17)}...`
           }
-          if (item.body.length >= 137) {
+          if (item.body && item.body.length >= 137) {
             item.body = `${item.body.slice(0, 137)}...`
           }
           return item

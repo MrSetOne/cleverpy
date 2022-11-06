@@ -18,8 +18,6 @@ const Profile = () => {
 
   const navigate = useNavigate()
 
-  const itsMe = Number(id) === user.id
-
   const opening = async () => {
     const target = Number(id)
     if (postsStorage.length === 0) {

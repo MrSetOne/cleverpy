@@ -7,6 +7,7 @@ import { addPost } from '../../../features/posts/postsSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPersonRunning, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { post } from '../../../types'
 
 interface props {
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -18,15 +19,8 @@ const AsideUser = ({ setMenuOpen }: props) => {
 
   const navigate = useNavigate()
 
-  interface post {
-    userId: number | null
-    gender: string | null
-    username: string | null
-    title: string
-    body: string
-  }
-
   const initialState: post = {
+    id: null,
     userId: user.id,
     gender: user.gender,
     username: user.username,
@@ -82,7 +76,7 @@ const AsideUser = ({ setMenuOpen }: props) => {
         <div>
           <label htmlFor='title'>Titulo</label>
           <p>
-            {post.title.length}
+            {post.title?.length}
             <span> /20</span>
           </p>
         </div>
@@ -91,14 +85,14 @@ const AsideUser = ({ setMenuOpen }: props) => {
           name='title'
           id='title'
           onChange={handleChange}
-          value={post.title}
+          value={post.title ? post.title : ''}
           autoComplete='off'
           maxLength={20}
         />
         <div>
           <label htmlFor='body'>Cuerpo</label>
           <p>
-            {post.body.length}
+            {post.body?.length}
             <span> /140</span>
           </p>
         </div>
@@ -106,7 +100,7 @@ const AsideUser = ({ setMenuOpen }: props) => {
           name='body'
           id='body'
           onChange={handleChange}
-          value={post.body}
+          value={post.body ? post.body : ''}
           maxLength={140}
           autoComplete='off'
         ></textarea>
