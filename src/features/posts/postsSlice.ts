@@ -11,16 +11,25 @@ interface post {
   body: string
 }
 
+interface profile {
+  id: number
+  username: string
+  gender: 'female' | 'male'
+  posts: post[]
+}
+
 export interface states {
   isLoading: boolean
   posts: post[]
   postsStorage: post[]
+  profile: profile | null
 }
 
 const initialState: states = {
   isLoading: true,
   posts: [],
   postsStorage: [],
+  profile: null,
 }
 
 export const getPosts = createAsyncThunk('post/GetPosts', async () => {
@@ -61,6 +70,17 @@ export const postsSlice = createSlice({
         state.posts = state.postsStorage.slice(0, state.posts.length + toExtract)
       }
     },
+    getProfile(state, action) {
+      state.isLoading = true
+      const i = state.postsStorage.findIndex((item) => item.userId === action.payload)
+      state.profile = {
+        id: state.postsStorage[i].userId,
+        username: state.postsStorage[i].username,
+        gender: state.postsStorage[i].gender,
+        posts: state.postsStorage.filter((item) => item.userId === action.payload),
+      }
+      state.isLoading = false
+    },
   },
   extraReducers(builder) {
     builder
@@ -75,7 +95,7 @@ export const postsSlice = createSlice({
   },
 })
 
-export const { deletePost, addPost, updatePost, getMorePosts } = postsSlice.actions
+export const { deletePost, addPost, updatePost, getMorePosts, getProfile } = postsSlice.actions
 
 export const postsSys = (state: RootState) => state.posts
 
