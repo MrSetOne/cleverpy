@@ -31,10 +31,16 @@ export const authSlice = createSlice({
       state.user.id = Math.trunc(Math.random() * 100000000)
       localStorage.setItem('id', state.user.id.toString())
     },
+    logout(state) {
+      localStorage.clear()
+      state.user.id = null
+      state.user.username = null
+      state.user.gender = null
+    },
   },
 })
 
-export const { login } = authSlice.actions
+export const { login, logout } = authSlice.actions
 
 export const authSys = (state: RootState) => state.user
 

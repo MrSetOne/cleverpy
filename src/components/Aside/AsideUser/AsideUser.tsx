@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { authSys } from '../../../features/auth/authSlice'
+import { authSys, logout } from '../../../features/auth/authSlice'
 import { useState } from 'react'
 import './AsideUser.scss'
 import { addPost } from '../../../features/posts/postsSlice'
@@ -64,11 +64,11 @@ const AsideUser = ({ setMenuOpen }: props) => {
       <header>
         <div>
           <div>
-            <button onClick={()=>navigate(`/profile/${user.id}`)}>
-              <FontAwesomeIcon icon={faUser}/>
+            <button onClick={() => navigate(`/profile/${user.id}`)}>
+              <FontAwesomeIcon icon={faUser} />
             </button>
-            <button>
-              <FontAwesomeIcon icon={faPersonRunning}/>
+            <button onClick={() => dispatch(logout())}>
+              <FontAwesomeIcon icon={faPersonRunning} />
             </button>
           </div>
           <img

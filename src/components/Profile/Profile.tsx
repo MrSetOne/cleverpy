@@ -27,7 +27,7 @@ const Profile = () => {
     }
     dispatch(getProfile(target))
   }
-  
+
   useEffect(() => {
     opening()
   }, [])
