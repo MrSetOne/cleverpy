@@ -79,7 +79,6 @@ export const postsSlice = createSlice({
       state.isLoading = true
       console.log(`Se solicita ${action.payload}`)
       const i = state.postsStorage.findIndex((item) => item.userId === action.payload)
-      console.log(i)
       state.profile = {
         id: state.postsStorage[i].userId,
         username: state.postsStorage[i].username,

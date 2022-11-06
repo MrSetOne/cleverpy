@@ -14,6 +14,19 @@
     display: flex;
     flex-direction: column;
     color: black;
+    position: relative;
+    > button {
+      position: absolute;
+      padding: 0.5rem 2rem;
+      font-size: 1.8rem;
+      border-radius: 5rem;
+      border: 2px solid #0000003d;
+      transition: 0.5s;
+      background-color: rgb(224, 224, 224);
+    }
+    > button:hover {
+      background-color: $white;
+    }
     > header {
       display: flex;
       justify-content: center;
@@ -40,6 +53,12 @@
     .posts__container {
       height: 100%;
       overflow-y: hidden;
+    }
+    > h2 {
+      margin-top: 3rem;
+      font-size: min(2.9vw, 4rem);
+      text-align: center;
+      color: rgba(0, 0, 0, 0.658);
     }
   }
 }

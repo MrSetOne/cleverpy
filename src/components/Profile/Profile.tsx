@@ -1,6 +1,9 @@
+import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { authSys } from '../../features/auth/authSlice'
 import { getPosts, getProfile, postsSys } from '../../features/posts/postsSlice'
 import Posts from '../Posts/Posts'
 import Spinner from '../Spinner/Spinner'
@@ -9,8 +12,11 @@ import './Profile.scss'
 const Profile = () => {
   const { id } = useParams()
 
-  const { postsStorage, profile, isLoading } = useAppSelector(postsSys)
   const dispatch = useAppDispatch()
+  const { postsStorage, profile, isLoading } = useAppSelector(postsSys)
+  const { user } = useAppSelector(authSys)
+
+  const navigate = useNavigate()
 
   const opening = async () => {
     const target = Number(id)
@@ -22,8 +28,6 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    console.log('me ejecuto')
-    console.log(id)
     opening()
   }, [])
 
@@ -33,16 +37,26 @@ const Profile = () => {
         <Spinner />
       ) : (
         <div className='Profile'>
+          <button onClick={() => navigate('/')}>
+            <FontAwesomeIcon icon={faAnglesLeft} />
+            Volver
+          </button>
           <header>
             <div>
               <img
-                src={`https://joeschmoe.io/api/v1/${profile?.gender}/${profile?.username}`}
-                alt={`Avatar de ${profile?.username}`}
+                src={`https://joeschmoe.io/api/v1/${profile ? profile.gender : user.gender}/${
+                  profile ? profile.username : user.username
+                }`}
+                alt={`Avatar de ${profile ? profile.username : user.username}`}
               />
             </div>
-            <h2>{profile?.username}</h2>
+            <h2>{profile ? profile.username : user.username}</h2>
           </header>
-          <Posts isProfile={true} />
+          {profile?.posts.length !== 0 ? (
+            <Posts isProfile={true} />
+          ) : (
+            <h2>Aun no has realizado ningún post.</h2>
+          )}
         </div>
       )}
     </section>

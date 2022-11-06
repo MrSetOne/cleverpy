@@ -94,6 +94,11 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
     dispatch(deletePost(item))
   }
 
+  const closeTools = () => {
+    setTools(false)
+    setOpen(false)
+  }
+
   return (
     <div className='PostTools'>
       {tools === 'delete' ? (
@@ -101,7 +106,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
           <h3>¿Estás seguro de {author ? 'borrar' : 'ocultar'} este post?</h3>
           <div>
             <button onClick={() => doADelete(post.id)}>Si</button>
-            <button onClick={() => setTools(false)}>No</button>
+            <button onClick={closeTools}>No</button>
           </div>
         </div>
       ) : (
@@ -148,7 +153,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
             )}
           </form>
           <footer>
-            <button onClick={() => setTools(false)}>Volver</button>
+            <button onClick={closeTools}>Volver</button>
             <button
               type='submit'
               disabled={!state.submitable}
