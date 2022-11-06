@@ -4,6 +4,9 @@ import { authSys } from '../../../features/auth/authSlice'
 import { useState } from 'react'
 import './AsideUser.scss'
 import { addPost } from '../../../features/posts/postsSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPersonRunning, faUser } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
 interface props {
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,6 +15,8 @@ interface props {
 const AsideUser = ({ setMenuOpen }: props) => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector(authSys)
+
+  const navigate = useNavigate()
 
   interface post {
     userId: number | null
@@ -58,6 +63,14 @@ const AsideUser = ({ setMenuOpen }: props) => {
     <div className='AsideUser'>
       <header>
         <div>
+          <div>
+            <button onClick={()=>navigate(`/profile/${user.id}`)}>
+              <FontAwesomeIcon icon={faUser}/>
+            </button>
+            <button>
+              <FontAwesomeIcon icon={faPersonRunning}/>
+            </button>
+          </div>
           <img
             src={`https://joeschmoe.io/api/v1/${user.gender}/${user.username}`}
             alt='Imagen de perfil'

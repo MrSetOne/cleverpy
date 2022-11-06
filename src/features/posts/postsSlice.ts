@@ -55,7 +55,6 @@ export const postsSlice = createSlice({
     addPost(state, action) {
       const newPost = {
         ...action.payload,
-        // userId:Number(action.payload.userId),
         id: Math.trunc(Math.random() * 100000000),
       }
       state.postsStorage = [newPost, ...state.postsStorage]
@@ -79,11 +78,15 @@ export const postsSlice = createSlice({
       state.isLoading = true
       console.log(`Se solicita ${action.payload}`)
       const i = state.postsStorage.findIndex((item) => item.userId === action.payload)
-      state.profile = {
-        id: state.postsStorage[i].userId,
-        username: state.postsStorage[i].username,
-        gender: state.postsStorage[i].gender,
-        posts: state.postsStorage.filter((item) => item.userId === action.payload),
+      if(i===-1){
+        state.profile = null
+      }else{
+        state.profile = {
+          id: state.postsStorage[i].userId,
+          username: state.postsStorage[i].username,
+          gender: state.postsStorage[i].gender,
+          posts: state.postsStorage.filter((item) => item.userId === action.payload),
+        }
       }
       state.isLoading = false
     },
