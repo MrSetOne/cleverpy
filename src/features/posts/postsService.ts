@@ -12,7 +12,6 @@ interface post {
 const getPosts = async () => {
   const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
   const users = await axios.get('https://randomuser.me/api/?results=10')
-  console.log(res.data)
   res.data.forEach((post: post) => {
     post.gender = users.data.results[post.userId - 1].gender
     post.username = users.data.results[post.userId - 1].name.first

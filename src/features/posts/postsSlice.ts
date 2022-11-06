@@ -95,7 +95,15 @@ export const postsSlice = createSlice({
         state.isLoading = true
       })
       .addCase(getPosts.fulfilled, (state, action) => {
-        state.postsStorage = action.payload
+        state.postsStorage = action.payload.map((item: post, i: number) => {
+          if (item.title.length >= 17) {
+            item.title = `${item.title.slice(0, 17)}...`
+          }
+          if (item.body.length >= 137) {
+            item.body = `${item.body.slice(0, 137)}...`
+          }
+          return item
+        })
         state.posts = state.postsStorage.slice(0, 20)
         state.isLoading = false
       })

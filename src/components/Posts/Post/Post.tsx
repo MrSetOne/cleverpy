@@ -28,14 +28,14 @@ const Post = ({ post, i }: Props) => {
   const { user } = useAppSelector(authSys)
   const navigate = useNavigate()
 
-  const author = user.username === post.userId
+  const author = user.id === post.userId
 
   const [tools, setTools] = useState<tools>(false)
   const [open, setOpen] = useState<boolean>(false)
 
   const variants = {
     initial: {
-      height: '24rem',
+      height: '21rem',
     },
     open: {
       height: '35rem',
