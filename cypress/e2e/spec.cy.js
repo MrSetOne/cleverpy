@@ -40,13 +40,12 @@ describe(`Post's CRUD`, () => {
       body: 'Pero tampoco mucho, no nos volvamos locos',
     },
   }
-
   it('Create a post', () => {
-    cy.get('button').should('contain.text', 'Publicar').should('be.disabled')
+    cy.get('.AsideUser form button').should('contain.text', 'Publicar').should('be.disabled')
     cy.get('.AsideUser form input').first().type(post.first.title)
-    cy.get('button').should('contain.text', 'Publicar').should('be.disabled')
+    cy.get('.AsideUser form button').should('contain.text', 'Publicar').should('be.disabled')
     cy.get('.AsideUser form textarea').type(post.first.body)
-    cy.get('.AsideUser button').click()
+    cy.get('.AsideUser form button').click()
   })
   it('Post has been created', () => {
     cy.get('.post header h2')
@@ -119,6 +118,7 @@ describe('Navegation test', () => {
     cy.get('.posts__btn button').click()
   }
   it('Loading all Posts', () => {
+    getMorePost()
     getMorePost()
     getMorePost()
     getMorePost()

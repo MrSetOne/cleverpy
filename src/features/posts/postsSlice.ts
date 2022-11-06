@@ -37,11 +37,13 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     deletePost(state, action) {
-      const customPosts: post[] = JSON.parse(localStorage.customPosts)
-      localStorage.setItem(
-        'customPosts',
-        JSON.stringify(customPosts.filter((item) => item.id !== action.payload)),
-      )
+      if (localStorage.customPosts) {
+        const customPosts: post[] = JSON.parse(localStorage.customPosts)
+        localStorage.setItem(
+          'customPosts',
+          JSON.stringify(customPosts.filter((item) => item.id !== action.payload)),
+        )
+      }
       state.postsStorage = state.postsStorage.filter((item) => item.id !== action.payload)
       state.posts = state.posts.filter((item) => item.id !== action.payload)
       if (state.profile) {
@@ -49,21 +51,30 @@ export const postsSlice = createSlice({
       }
     },
     addPost(state, action) {
-      const newPost = {
+      const newPost: post = {
         ...action.payload,
         id: Math.trunc(Math.random() * 100000000),
       }
-      const customPosts = JSON.parse(localStorage.customPosts)
-      localStorage.setItem('customPosts', JSON.stringify([newPost && newPost, ...customPosts]))
+      if (localStorage.customPosts) {
+        const customPosts = JSON.parse(localStorage.customPosts)
+        localStorage.setItem('customPosts', JSON.stringify([newPost && newPost, ...customPosts]))
+      } else {
+        localStorage.setItem('customPosts', JSON.stringify([newPost && newPost]))
+      }
+      if (newPost.userId === state.profile?.id) {
+        state.profile.posts = [newPost, ...state.profile.posts]
+      }
       state.postsStorage = [newPost, ...state.postsStorage]
       state.posts = state.postsStorage.slice(0, state.posts.length)
     },
     updatePost(state, action) {
       const { i, title, body, id } = action.payload
-      const customPosts: post[] = JSON.parse(localStorage.customPosts)
-      const customIndex = customPosts.findIndex((item) => item.id === id)
-      customPosts[customIndex] = { ...customPosts[customIndex], title, body }
-      localStorage.setItem('customPosts', JSON.stringify(customPosts))
+      if (localStorage.customPosts) {
+        const customPosts: post[] = JSON.parse(localStorage.customPosts)
+        const customIndex = customPosts.findIndex((item) => item.id === id)
+        customPosts[customIndex] = { ...customPosts[customIndex], title, body }
+        localStorage.setItem('customPosts', JSON.stringify(customPosts))
+      }
       state.postsStorage[i] = { ...state.postsStorage[i], title, body }
       state.posts[i] = { ...state.posts[i], title, body }
     },
@@ -107,7 +118,10 @@ export const postsSlice = createSlice({
           }
           return item
         })
-        state.postsStorage = [...JSON.parse(localStorage.customPosts), ...state.postsStorage]
+        if (localStorage.customPosts) {
+          state.postsStorage = [...JSON.parse(localStorage.customPosts), ...state.postsStorage]
+        }
+        console.log('ya he borrado')
         state.posts = state.postsStorage.slice(0, 20)
         state.isLoading = false
       })
