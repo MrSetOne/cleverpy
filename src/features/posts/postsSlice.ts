@@ -45,12 +45,17 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     deletePost(state, action) {
-      state.postsStorage.splice(action.payload, 1)
-      state.posts = state.postsStorage.slice(0, state.posts.length)
+      console.log(action.payload)
+      state.postsStorage = state.postsStorage.filter((item) => item.id !== action.payload)
+      state.posts = state.posts.filter((item) => item.id !== action.payload)
+      if (state.profile) {
+        state.profile.posts = state.profile?.posts.filter((item) => item.id !== action.payload)
+      }
     },
     addPost(state, action) {
       const newPost = {
         ...action.payload,
+        // userId:Number(action.payload.userId),
         id: Math.trunc(Math.random() * 100000000),
       }
       state.postsStorage = [newPost, ...state.postsStorage]
@@ -72,7 +77,9 @@ export const postsSlice = createSlice({
     },
     getProfile(state, action) {
       state.isLoading = true
+      console.log(`Se solicita ${action.payload}`)
       const i = state.postsStorage.findIndex((item) => item.userId === action.payload)
+      console.log(i)
       state.profile = {
         id: state.postsStorage[i].userId,
         username: state.postsStorage[i].username,

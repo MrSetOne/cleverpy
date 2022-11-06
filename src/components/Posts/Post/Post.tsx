@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import PostTools from './PostTools/PostTools'
 import PostMenu from './PostMenu/PostMenu'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   post: {
@@ -25,6 +26,7 @@ type tools = 'edit' | 'delete' | false
 
 const Post = ({ post, i }: Props) => {
   const { user } = useAppSelector(authSys)
+  const navigate = useNavigate()
 
   const author = user.username === post.userId
 
@@ -49,11 +51,13 @@ const Post = ({ post, i }: Props) => {
       whileHover={{ scale: 1.03 }}
     >
       <header className='post__header'>
-        <img
-          src={`https://joeschmoe.io/api/v1/${post.gender}/${post.userId}`}
-          alt={`Avatar de ${post.userId}`}
-        />
-        <h2>{post.username}</h2>
+        <div className='post__header--link' onClick={() => navigate(`/profile/${post.userId}`)}>
+          <img
+            src={`https://joeschmoe.io/api/v1/${post.gender}/${post.username}`}
+            alt={`Avatar de ${post.userId}`}
+          />
+          <h2>{post.username}</h2>
+        </div>
         <PostMenu setTools={setTools} author={author} tools={tools} open={open} setOpen={setOpen} />
       </header>
       {!tools ? (

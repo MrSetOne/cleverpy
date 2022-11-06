@@ -12,17 +12,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.3rem;
     padding-bottom: 0.7rem;
     border-bottom: 1px solid rgb(77, 77, 77);
-    h2 {
+    .post__header--link {
+      display: flex;
+      gap: 1.3rem;
+      align-items: center;
       flex: 1;
-      font-size: 3rem;
-    }
-    img {
-      height: 5rem;
-      background: $degGray;
-      border-radius: 50%;
+      cursor: pointer;
+      h2 {
+        font-size: min(5vw, 3rem);
+      }
+      img {
+        height: 5rem;
+        background: $degGray;
+        border-radius: 50%;
+      }
     }
     .post__btns {
       display: flex;

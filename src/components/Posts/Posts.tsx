@@ -10,8 +10,12 @@ import Post from './Post/Post'
 import './Posts.scss'
 import ScrollToTop from './ScrollToTop/ScrollToTop'
 
-const Posts = () => {
-  const { posts, isLoading, postsStorage } = useAppSelector(postsSys)
+interface props {
+  isProfile?: boolean
+}
+
+const Posts = ({ isProfile = false }: props) => {
+  const { posts, isLoading, postsStorage, profile } = useAppSelector(postsSys)
   const dispatch = useAppDispatch()
 
   const myRef = useRef<HTMLDivElement>(null)
@@ -20,11 +24,13 @@ const Posts = () => {
   const [scrollY, setScrollY] = useState<number>(0)
 
   useEffect(() => {
-    dispatch(getPosts())
+    if (!isProfile && postsStorage.length === 0) {
+      dispatch(getPosts())
+    }
   }, [])
 
   const handleUIEvent = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
-    e.stopPropagation() // Handy if you want to prevent event bubbling to scrollable parent
+    e.stopPropagation()
     setScrollY(e.currentTarget.scrollTop)
   }
 
@@ -51,15 +57,20 @@ const Posts = () => {
       ref={myRef}
       onScrollCapture={handleUIEvent}
       className={`posts__container ${isLoading ? 'posts__container--loading' : null}`}
+      style={{ paddingTop: isProfile ? '3rem' : undefined }}
     >
       {isLoading ? (
         <Spinner />
+      ) : isProfile ? (
+        profile?.posts.map((item, i) => {
+          return <Post post={item} i={i} key={item.id} />
+        })
       ) : (
         posts.map((item, i) => {
           return <Post post={item} i={i} key={item.id} />
         })
       )}
-      {!isLoading && (
+      {!isLoading && !isProfile && (
         <>
           <div className='posts__btn'>
             {postsStorage.length === posts.length ? (

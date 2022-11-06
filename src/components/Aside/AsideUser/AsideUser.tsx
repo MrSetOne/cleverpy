@@ -14,15 +14,17 @@ const AsideUser = ({ setMenuOpen }: props) => {
   const { user } = useAppSelector(authSys)
 
   interface post {
-    userId: string | null
+    userId: number | null
     gender: string | null
+    username: string | null
     title: string
     body: string
   }
 
   const initialState: post = {
-    userId: user.username,
+    userId: user.id,
     gender: user.gender,
+    username: user.username,
     title: '',
     body: '',
   }

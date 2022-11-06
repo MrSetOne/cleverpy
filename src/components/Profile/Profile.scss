@@ -1,0 +1,51 @@
+@import '../../colors.scss';
+.Profile__container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  overflow-y: scroll;
+  .Profile {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    > header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      div {
+        background: $degCleverpy;
+        width: 20rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          border-radius: 50%;
+          background: $degGray;
+        }
+      }
+      h2 {
+        font-size: 3rem;
+      }
+    }
+    .posts__container {
+      height: 100%;
+      overflow-y: hidden;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .Profile__container {
+    grid-column: 1/3;
+  }
+}
