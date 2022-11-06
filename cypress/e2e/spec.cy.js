@@ -105,3 +105,33 @@ describe(`Post's CRUD`, () => {
     cy.get('.post').contains(post.edited.body).should('not.exist')
   })
 })
+
+describe('Responsive test', () => {
+  it('Burger Menu works', () => {
+    cy.viewport(390, 844)
+    cy.get('.BurgerIcon >div').click().wait(1000).click()
+  })
+})
+
+describe('Navegation test', () => {
+  const getMorePost = () => {
+    cy.get('.posts__container').wait(1000).scrollTo('bottom', { duration: 1000 })
+    cy.get('.posts__btn button').click()
+  }
+  it('Loading all Posts', () => {
+    getMorePost()
+    getMorePost()
+    getMorePost()
+    getMorePost()
+    cy.get('.posts__container').wait(1000).scrollTo('bottom', { duration: 1000 })
+    cy.get('.posts__btn p')
+      .first()
+      .contains('Ya no quedan mas posts...')
+      .next()
+      .contains('¿Porque no creas uno?')
+  })
+  it('Scroll to top', () => {
+    cy.get('.ScrollToTop').click().wait(1000)
+    cy.window().its('scrollY').should('equal', 0)
+  })
+})
