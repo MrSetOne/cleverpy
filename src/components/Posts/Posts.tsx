@@ -17,10 +17,16 @@ const Posts = () => {
   const myRef = useRef<HTMLDivElement>(null)
 
   const [loadingMore, setLoadingMore] = useState<boolean>(false)
+  const [scrollY, setScrollY] = useState<number>(0)
 
   useEffect(() => {
     dispatch(getPosts())
   }, [])
+
+  const handleUIEvent = (e: React.UIEvent<HTMLDivElement, UIEvent>): void => {
+    e.stopPropagation() // Handy if you want to prevent event bubbling to scrollable parent
+    setScrollY(e.currentTarget.scrollTop)
+  }
 
   const downloadMore = () => {
     setLoadingMore(true)
@@ -43,6 +49,7 @@ const Posts = () => {
   return (
     <div
       ref={myRef}
+      onScrollCapture={handleUIEvent}
       className={`posts__container ${isLoading ? 'posts__container--loading' : null}`}
     >
       {isLoading ? (
@@ -70,7 +77,7 @@ const Posts = () => {
               </motion.button>
             )}
           </div>
-          <ScrollToTop action={toTop} />
+          <ScrollToTop action={toTop} scrollY={scrollY} />
         </>
       )}
     </div>
