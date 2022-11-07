@@ -56,12 +56,18 @@ const AsideUser = ({ setMenuOpen }: props) => {
   return (
     <div className='AsideUser'>
       <header>
-        <div>
+        <div className='AsideUser__headerContainer'>
           <div>
-            <button onClick={() => navigate(`/profile/${user.id}`)}>
+            <button
+              className='AsideUser__headerContainer--profile'
+              onClick={() => navigate(`/profile/${user.id}`)}
+            >
               <FontAwesomeIcon icon={faUser} />
             </button>
-            <button onClick={() => dispatch(logout())}>
+            <button
+              className='AsideUser__headerContainer--logout'
+              onClick={() => dispatch(logout())}
+            >
               <FontAwesomeIcon icon={faPersonRunning} />
             </button>
           </div>

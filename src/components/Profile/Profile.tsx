@@ -28,7 +28,7 @@ const Profile = () => {
 
   useEffect(() => {
     opening()
-  }, [])
+  }, [id])
 
   return (
     <section className='Profile__container'>
@@ -51,11 +51,7 @@ const Profile = () => {
             </div>
             <h2>{profile ? profile.username : user.username}</h2>
           </header>
-          {profile?.posts.length !== 0 ? (
-            <Posts isProfile={true} />
-          ) : (
-            <h2>Aun no has realizado ningún post.</h2>
-          )}
+          {profile?.posts ? <Posts isProfile={true} /> : <h2>Aun no has realizado ningún post.</h2>}
         </div>
       )}
     </section>

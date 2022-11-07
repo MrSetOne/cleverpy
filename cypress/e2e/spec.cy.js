@@ -135,3 +135,52 @@ describe('Navegation test', () => {
     cy.window().its('scrollY').should('equal', 0)
   })
 })
+describe('Profiles', () => {
+  it('Visit other user', () => {
+    cy.get('.post .post__header h2')
+      .first()
+      .then((username) => {
+        const target = username.text()
+        cy.get('.post .post__header .post__header--link').first().click()
+        cy.get('.Profile > header h2').should('contain', target)
+      })
+  })
+  it('Hide post in profile view', () => {
+    cy.get('.post h3')
+      .first()
+      .then((title) => {
+        const target = title.text()
+        cy.get('.post .PostMenu button')
+          .first()
+          .click()
+          .get('.PostMenu--delete')
+          .first()
+          .click()
+          .get('.PostTools__delete')
+          .contains('Si')
+          .click()
+        cy.get('.post h3').first().should('not.include.text', target)
+      })
+  })
+  it('Logo works like home-btn', () => {
+    cy.get('.header img').click()
+    cy.location().should((url) => expect(url.pathname).to.eq('/'))
+  })
+  it('Navigate to my profile', () => {
+    cy.get('.AsideUser > header .AsideUser__headerContainer--profile').click()
+    cy.get('.post').should('not.exist')
+    cy.get('.Profile h2').should('contain', 'Aun no has realizado ningún post.')
+  })
+})
+describe('Do Logout', () => {
+  it('Do Logout', () => {
+    cy.get('.AsideUser > header .AsideUser__headerContainer--logout').click()
+  })
+  it(`Can't see posts`, () => {
+    cy.get('.post').should('not.exist')
+  })
+  it('you can only see the login aside and the unlogged page', () => {
+    cy.get('.Unlogged')
+    cy.get('.logPage')
+  })
+})
