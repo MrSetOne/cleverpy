@@ -32,7 +32,9 @@ export const authSlice = createSlice({
       localStorage.setItem('id', state.user.id.toString())
     },
     logout(state) {
-      localStorage.clear()
+      localStorage.removeItem('username')
+      localStorage.removeItem('gender')
+      localStorage.removeItem('id')
       state.user.id = null
       state.user.username = null
       state.user.gender = null
