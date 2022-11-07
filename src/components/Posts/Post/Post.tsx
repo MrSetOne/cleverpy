@@ -9,16 +9,10 @@ import { motion } from 'framer-motion'
 import PostTools from './PostTools/PostTools'
 import PostMenu from './PostMenu/PostMenu'
 import { useNavigate } from 'react-router-dom'
+import { post } from '../../../types'
 
 interface Props {
-  post: {
-    id: number
-    userId: number | string
-    gender?: 'female' | 'male'
-    title: string
-    body: string
-    username: string
-  }
+  post: post
   i: number
 }
 

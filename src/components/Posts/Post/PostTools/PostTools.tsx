@@ -4,6 +4,7 @@ import { deletePost, updatePost } from '../../../../features/posts/postsSlice'
 import { motion } from 'framer-motion'
 import './PostTools.scss'
 import { useState } from 'react'
+import { post } from '../../../../types'
 
 type tools = 'edit' | 'delete' | false
 type form = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
@@ -13,29 +14,19 @@ interface props {
   author: boolean
   i: number
   setTools: React.Dispatch<React.SetStateAction<tools>>
-  post: {
-    id: number
-    userId: number | string
-    gender?: 'female' | 'male'
-    title: string
-    body: string
-  }
+  post: post
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface state {
   updating: 'title' | 'body'
-  post: {
-    id: number
-    title: string
-    body: string
-  }
+  post: post
   submitable: boolean
 }
 
 interface show {
-  title: number
-  body: number
+  title: number | undefined
+  body: number | undefined
 }
 
 const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
@@ -43,11 +34,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
 
   const initialState: state = {
     updating: 'title',
-    post: {
-      id: post.id,
-      title: post.title,
-      body: post.body,
-    },
+    post,
     submitable: false,
   }
 
@@ -68,8 +55,8 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
 
   const [state, setState] = useState<state>(initialState)
   const [show, setShow] = useState<show>({
-    body: initialState.post.body.length,
-    title: initialState.post.title.length,
+    body: initialState.post.body?.length,
+    title: initialState.post.title?.length,
   })
 
   const handleChange = (e: form) => {
@@ -92,7 +79,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
     setOpen(false)
   }
 
-  const doADelete = (item: number) => {
+  const doADelete = (item: number | null) => {
     dispatch(deletePost(item))
   }
 
@@ -129,7 +116,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
                   type='text'
                   name='title'
                   id='title'
-                  defaultValue={state.post.title}
+                  defaultValue={state.post.title ? state.post.title : ''}
                   onChange={handleChange}
                   maxLength={20}
                 />
@@ -143,7 +130,7 @@ const PostTools = ({ tools, author, setTools, i, post, setOpen }: props) => {
                 <textarea
                   name='body'
                   id='body'
-                  defaultValue={state.post.body}
+                  defaultValue={state.post.body ? state.post.body : ''}
                   onChange={handleChange}
                   maxLength={140}
                 />
