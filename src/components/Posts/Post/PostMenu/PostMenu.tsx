@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBan, faEyeSlash, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { tools } from '../../../../types'
 
-
 interface props {
   setTools: React.Dispatch<React.SetStateAction<tools>>
   author: boolean

@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 import PostTools from './PostTools/PostTools'
 import PostMenu from './PostMenu/PostMenu'
 import { useNavigate } from 'react-router-dom'
-import { post , tools} from '../../../types'
+import { post, tools } from '../../../types'
 
 interface Props {
   post: post

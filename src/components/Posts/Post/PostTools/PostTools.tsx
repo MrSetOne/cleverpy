@@ -4,7 +4,7 @@ import { deletePost, updatePost } from '../../../../features/posts/postsSlice'
 import { motion } from 'framer-motion'
 import './PostTools.scss'
 import { useState } from 'react'
-import { post , tools } from '../../../../types'
+import { post, tools } from '../../../../types'
 
 type form = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
 
