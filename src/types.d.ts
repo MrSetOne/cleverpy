@@ -6,3 +6,5 @@ export interface post {
   title: string | null
   body: string | null
 }
+
+export type tools = 'edit' | 'delete' | false

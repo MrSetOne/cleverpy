@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import './PostMenu.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBan, faEyeSlash, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { tools } from '../../../../types'
 
-type tools = 'edit' | 'delete' | false
 
 interface props {
   setTools: React.Dispatch<React.SetStateAction<tools>>
