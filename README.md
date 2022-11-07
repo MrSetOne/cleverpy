@@ -2,20 +2,19 @@
 
  ## :clipboard: Indice 
 
- - [Sobre el proyecto]()
+- [Sobre el proyecto](#sobre-el-proyecto)
 
-    - [Tecnologías utilizadas]()
+    - [Tecnologías utilizadas](#wrench-tecnologías-utilizadas)
 
-    - [Origen]()
+    - [Origen](#mag-origen)
 
-    - [Paleta de colores]()
+    - [Paleta de colores](#art-paleta-de-colores)
 
- - [Scripts]()
-
-- [Autor]()
-
+- [Scripts](#space_invader-scripts)
 
 # Sobre el proyecto
+
+Para visitar el proyecto te puedes dirigir directamente a su [deploy](https://mike-cleverpy.vercel.app/)
 
 ## :wrench: Tecnologías utilizadas
 
