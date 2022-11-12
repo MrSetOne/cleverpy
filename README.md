@@ -1,14 +1,14 @@
-<h1 align=center > Cleverpy </h1> 
+<h1 align=center > Cleverpy </h1>
 
- ## :clipboard: Indice 
+## :clipboard: Indice
 
 - [Sobre el proyecto](#sobre-el-proyecto)
 
-    - [Tecnologías utilizadas](#wrench-tecnologías-utilizadas)
+  - [Tecnologías utilizadas](#wrench-tecnologías-utilizadas)
 
-    - [Origen](#mag-origen)
+  - [Origen](#mag-origen)
 
-    - [Paleta de colores](#art-paleta-de-colores)
+  - [Paleta de colores](#art-paleta-de-colores)
 
 - [Scripts](#space_invader-scripts)
 
@@ -33,6 +33,7 @@ const stack:technologie[] = [
 ```
 
 ## :mag: Origen
+
 ![Cleverpy](./src/assets/Logo-Cleverpy.png)
 
 Consiste en una prueba técnica solicitada por [Cleverpy](https://cleverpy.com/), el objetivo principal es diseñar, implementar y conectar un plataforma con “cards”, en concreto, los resultados
@@ -62,15 +63,15 @@ Los requisitos principales a cumplir son:
 Para los colores de la aplicación he usado unos colores sobrios, para no saturar y generar un efecto "Rainbow". También se ha incluido en diversos lugares el degradado de [Cleverpy](https://cleverpy.com/), para darle identidad.
 
 # :space_invader: Scripts
-    
+
 ## `npm run dev`
-    
+
 Inicializa un servidor de prueba.
-    
+
 ## `npm run dev:net`
-    
-Inicializa un servidor de prueba con acceso desde otros dispositivos (ideal para probar el responsive). 
-    
+
+Inicializa un servidor de prueba con acceso desde otros dispositivos (ideal para probar el responsive).
+
 ## `npm run format`
 
 Aplica Prettier a todos los archivos para que compartan la misma estética.
