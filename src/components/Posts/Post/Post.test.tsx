@@ -3,9 +3,18 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Post from './Post'
 import { prettyDOM } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import { store } from '../../../app/store'
-import { BrowserRouter } from 'react-router-dom'
+import { renderWithProviders } from '../../../app/test-utils'
+import { post } from '../../../types'
+
+interface stateExample {
+  user: {
+    user: {
+      id: number
+      username: string
+      gender: 'male' | 'female' | null
+    }
+  }
+}
 
 const mockedNavigate = jest.fn()
 
@@ -14,27 +23,26 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedNavigate,
 }))
 
+const postExample: post = {
+  username: 'paco',
+  id: 1,
+  userId: 1,
+  gender: 'male',
+  title: 'The title',
+  body: 'The body',
+}
+
+const stateExample: stateExample = {
+  user: { user: { username: 'paco', gender: 'female', id: 55 } },
+}
+
 describe('<Post/>', () => {
   let component: any
 
   beforeEach(() => {
-    component = render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Post
-            i={1}
-            post={{
-              username: 'paco',
-              id: 1,
-              userId: 1,
-              gender: 'male',
-              title: 'The title',
-              body: 'The body',
-            }}
-          />
-        </BrowserRouter>
-      </Provider>,
-    )
+    component = renderWithProviders(<Post i={1} post={postExample} />, {
+      preloadedState: stateExample,
+    })
   })
 
   test('Renders post', () => {
@@ -56,4 +64,26 @@ describe('<Post/>', () => {
     }
     expect(mockedNavigate.mock.calls).toHaveLength(1)
   })
+
+  test(`Open & close menu works(Alien)`, () => {
+    const menu = component.container.querySelector('.PostMenu')
+    const switchBtn = component.getByTestId('PostMenu--switch')
+    expect(menu).toHaveStyle('width: 40px;')
+    fireEvent.click(switchBtn)
+    setTimeout(() => {
+      expect(menu).toHaveStyle('width: 77px')
+    }, 300)
+  })
+
+  test('Edit button does not exist in alien post', () => {
+    const editBtn = screen.queryByTestId('PostMenu--edit')
+    expect(editBtn).toBeNull()
+  })
+  // TODO
+  // ! MENU
+  // Open & close menu works(Author)
+  // Edit button exist in your post
+  // ! POST TOOLS
+  // Mock delete post
+  // Mock edit post
 })

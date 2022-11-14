@@ -68,6 +68,8 @@ const PostMenu = ({ tools, setTools, author, open, setOpen }: props) => {
       animate={open ? 'open' : 'closed'}
     >
       <motion.button
+        className='PostMenu--switch'
+        data-testid='PostMenu--switch'
         variants={variants.menuBotton}
         initial={'closed'}
         animate={open ? 'open' : 'closed'}
@@ -79,6 +81,7 @@ const PostMenu = ({ tools, setTools, author, open, setOpen }: props) => {
       {author && (
         <motion.button
           className='PostMenu--edit'
+          data-testid='PostMenu--edit'
           variants={variants.editButton}
           initial={'closed'}
           animate={open ? 'open' : 'closed'}
@@ -90,6 +93,7 @@ const PostMenu = ({ tools, setTools, author, open, setOpen }: props) => {
       )}
       <motion.button
         className='PostMenu--delete'
+        data-testid='PostMenu--delete'
         onClick={() => setTools(tools !== 'delete' ? 'delete' : false)}
         whileHover={{ scale: 1.1 }}
       >
