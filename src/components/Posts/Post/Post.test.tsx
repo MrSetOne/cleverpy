@@ -1,11 +1,9 @@
 import React from 'react'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Post from './Post'
-import { prettyDOM } from '@testing-library/react'
 import { renderWithProviders } from '../../../app/test-utils'
 import { post } from '../../../types'
-import { act } from 'react-dom/test-utils'
 
 interface stateExample {
   user: {
@@ -97,13 +95,9 @@ describe('<Post/>', () => {
     await waitFor(() => expect(menu).toHaveStyle('width: 112px'))
   })
 
-
-
-
-  // TODO
-  // ! MENU
-  // Edit button exist in your post
-  // ! POST TOOLS
-  // Mock delete post
-  // Mock edit post
+  test('Edit button exist in your post', () => {
+    doARender(true)
+    const editBtn = component.getByTestId('PostMenu--edit')
+    expect(editBtn)
+  })
 })
