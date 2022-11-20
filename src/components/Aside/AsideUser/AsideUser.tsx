@@ -54,7 +54,7 @@ const AsideUser = ({ setMenuOpen }: props) => {
   }
 
   return (
-    <div className='AsideUser'>
+    <div className='AsideUser' data-testid='asideUser'>
       <header>
         <div className='AsideUser__headerContainer'>
           <div>
@@ -66,6 +66,7 @@ const AsideUser = ({ setMenuOpen }: props) => {
             </button>
             <button
               className='AsideUser__headerContainer--logout'
+              data-testid='aside-logout'
               onClick={() => dispatch(logout())}
             >
               <FontAwesomeIcon icon={faPersonRunning} />

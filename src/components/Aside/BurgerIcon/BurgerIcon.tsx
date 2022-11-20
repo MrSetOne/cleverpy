@@ -49,7 +49,7 @@ const BurgerIcon = ({ menuOpen, setMenuOpen }: props) => {
   }
 
   return (
-    <div className='BurgerIcon' onClick={() => setMenuOpen(!menuOpen)}>
+    <button className='BurgerIcon' onClick={() => setMenuOpen(!menuOpen)} data-testid='BurgerIcon'>
       <motion.div
         variants={variants.button}
         initial={'close'}
@@ -71,7 +71,7 @@ const BurgerIcon = ({ menuOpen, setMenuOpen }: props) => {
           animate={menuOpen ? 'open' : 'close'}
         />
       </motion.div>
-    </div>
+    </button>
   )
 }
 

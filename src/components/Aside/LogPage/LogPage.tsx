@@ -44,7 +44,7 @@ const LogPage = ({ setMenuOpen }: props) => {
   }
 
   return (
-    <div className='logPage'>
+    <div className='logPage' data-testid='logPage'>
       <img src={logo} alt='Cleverpy' />
       <form onSubmit={handleSubmit} autoComplete='off'>
         <label htmlFor='username'>Usuario</label>

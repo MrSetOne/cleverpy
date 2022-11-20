@@ -40,6 +40,7 @@ const Aside = () => {
 
   return (
     <motion.aside
+      data-testid='asideMenu'
       className='asideMenu'
       variants={variants}
       initial={'close'}
